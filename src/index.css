@@ -1,0 +1,221 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap");
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Rubik", sans-serif;
+  color: hsl(211deg, 10%, 45%);
+}
+
+button:not(:disabled) {
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+body {
+  font-size: 16px;
+  background-color: hsl(228deg, 33%, 97%);
+}
+body main {
+  margin: 4rem 0;
+  padding: 0 15%;
+}
+body main .comments {
+  margin-bottom: 1rem;
+}
+body main .comments .comment-wrapper:not(:last-of-type) {
+  margin-bottom: 1rem;
+}
+body main .comments .comment-wrapper .comment {
+  display: flex;
+  flex-direction: row;
+  padding: 1.5rem;
+  border-radius: 6px;
+  background-color: hsl(0deg, 0%, 100%);
+}
+body main .comments .comment-wrapper .comment:not(:last-of-type) {
+  margin-bottom: 1rem;
+}
+body main .comments .comment-wrapper .comment .comment-voter {
+  display: flex;
+  flex-direction: column;
+  margin-right: 1.5rem;
+}
+body main .comments .comment-wrapper .comment .comment-voter > * {
+  padding: 0.25rem 0.5rem;
+  background-color: hsl(228deg, 33%, 97%);
+}
+body main .comments .comment-wrapper .comment .comment-voter button {
+  border: none;
+  color: hsl(239deg, 57%, 85%);
+  font-weight: 500;
+  transition: all 250ms ease;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+body main .comments .comment-wrapper .comment .comment-voter button:first-of-type {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+body main .comments .comment-wrapper .comment .comment-voter button:last-of-type {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+body main .comments .comment-wrapper .comment .comment-voter button:hover:not(:disabled) {
+  color: hsl(238deg, 40%, 52%);
+}
+body main .comments .comment-wrapper .comment .comment-voter .comment-voter-score {
+  min-width: 2.4em;
+  color: hsl(238deg, 40%, 52%);
+  font-weight: 500;
+  text-align: center;
+}
+body main .comments .comment-wrapper .comment .comment-main {
+  display: flex;
+  flex-direction: column;
+}
+body main .comments .comment-wrapper .comment .comment-main .comment-main-header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+body main .comments .comment-wrapper .comment .comment-main .comment-main-header .comment-main-header-info {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+body main .comments .comment-wrapper .comment .comment-main .comment-main-header .comment-main-header-info > *:not(:last-child) {
+  margin-right: 0.75rem;
+}
+body main .comments .comment-wrapper .comment .comment-main .comment-main-header .comment-main-header-info .comment-author-profile-photo {
+  width: 2rem;
+}
+body main .comments .comment-wrapper .comment .comment-main .comment-main-header .comment-main-header-info .comment-author {
+  color: hsl(212deg, 24%, 26%);
+  font-weight: 500;
+}
+body main .comments .comment-wrapper .comment .comment-main .comment-main-header .comment-main-header-info .comment-owner-tag {
+  padding: 0.1em 0.4em 0.2em 0.4em;
+  border-radius: 1.5px;
+  background-color: hsl(238deg, 40%, 52%);
+  color: hsl(0deg, 0%, 100%);
+  font-size: 0.75rem;
+}
+body main .comments .comment-wrapper .comment .comment-main .comment-main-header .comment-main-header-actions {
+  display: flex;
+  flex-flow: row nowrap;
+}
+body main .comments .comment-wrapper .comment .comment-main .comment-main-header .comment-main-header-actions .comment-main-header-action {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  transition: all 250ms ease;
+}
+body main .comments .comment-wrapper .comment .comment-main .comment-main-header .comment-main-header-actions .comment-main-header-action:not(:last-child) {
+  margin-right: 1.5rem;
+}
+body main .comments .comment-wrapper .comment .comment-main .comment-main-header .comment-main-header-actions .comment-main-header-action path {
+  transition: all 250ms ease;
+}
+body main .comments .comment-wrapper .comment .comment-main .comment-main-header .comment-main-header-actions .comment-main-header-action.comment-main-header-reply, body main .comments .comment-wrapper .comment .comment-main .comment-main-header .comment-main-header-actions .comment-main-header-action.comment-main-header-edit {
+  color: hsl(238deg, 40%, 52%);
+}
+body main .comments .comment-wrapper .comment .comment-main .comment-main-header .comment-main-header-actions .comment-main-header-action.comment-main-header-reply:hover, body main .comments .comment-wrapper .comment .comment-main .comment-main-header .comment-main-header-actions .comment-main-header-action.comment-main-header-edit:hover {
+  color: hsl(239deg, 57%, 85%);
+}
+body main .comments .comment-wrapper .comment .comment-main .comment-main-header .comment-main-header-actions .comment-main-header-action.comment-main-header-reply:hover .comment-main-header-action-icon path, body main .comments .comment-wrapper .comment .comment-main .comment-main-header .comment-main-header-actions .comment-main-header-action.comment-main-header-edit:hover .comment-main-header-action-icon path {
+  fill: hsl(239deg, 57%, 85%);
+}
+body main .comments .comment-wrapper .comment .comment-main .comment-main-header .comment-main-header-actions .comment-main-header-action.comment-main-header-delete {
+  color: hsl(358deg, 79%, 66%);
+}
+body main .comments .comment-wrapper .comment .comment-main .comment-main-header .comment-main-header-actions .comment-main-header-action.comment-main-header-delete:hover {
+  color: hsl(357deg, 100%, 86%);
+}
+body main .comments .comment-wrapper .comment .comment-main .comment-main-header .comment-main-header-actions .comment-main-header-action.comment-main-header-delete:hover .comment-main-header-action-icon path {
+  fill: hsl(357deg, 100%, 86%);
+}
+body main .comments .comment-wrapper .comment .comment-main .comment-main-header .comment-main-header-actions .comment-main-header-action .comment-main-header-action-icon {
+  margin-right: 0.375rem;
+  transition: all 250ms ease;
+}
+body main .comments .comment-wrapper .comment .comment-main .comment-text .comment-text-recipient {
+  color: hsl(238deg, 40%, 52%);
+  font-weight: 500;
+}
+body main .comments .comment-wrapper .comment .comment-main .comment-edit-section {
+  display: none;
+}
+body main .comments .comment-wrapper .comment-replies {
+  display: flex;
+  flex-flow: row nowrap;
+}
+body main .comments .comment-wrapper .comment-replies .vertical-indentation-line {
+  width: 4px;
+  margin: 0 2rem;
+  border-radius: 2px;
+  background-color: hsl(223deg, 19%, 93%);
+}
+body main .comment-create, body main .comment-edit-section, body main .comment-reply-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-radius: 6px;
+  background-color: hsl(0deg, 0%, 100%);
+}
+body main .comment-create > *:not(:last-child), body main .comment-edit-section > *:not(:last-child), body main .comment-reply-section > *:not(:last-child) {
+  margin-right: 0.75rem;
+}
+body main .comment-create .comment-author-profile-photo, body main .comment-edit-section .comment-author-profile-photo, body main .comment-reply-section .comment-author-profile-photo {
+  width: 2.5rem;
+}
+body main .comment-create .comment-input, body main .comment-edit-section .comment-input, body main .comment-reply-section .comment-input {
+  width: 100%;
+  padding: 1em 1.5em;
+  border: 1px solid hsl(223deg, 19%, 93%);
+  border-radius: 6px;
+  -moz-columns: 20;
+       columns: 20;
+  resize: none;
+  transition: all 250ms ease;
+}
+body main .comment-create .comment-input:focus, body main .comment-edit-section .comment-input:focus, body main .comment-reply-section .comment-input:focus {
+  outline: 0;
+  border-color: hsl(239deg, 57%, 85%);
+}
+body main .comment-create .comment-action-button, body main .comment-edit-section .comment-action-button, body main .comment-reply-section .comment-action-button {
+  padding: 0.75em 1.5em;
+  border: none;
+  border-radius: 6px;
+  background-color: hsl(238deg, 40%, 52%);
+  font-size: 0.9rem;
+  color: hsl(0deg, 0%, 100%);
+  text-transform: uppercase;
+  transition: all 250ms ease;
+}
+body main .comment-create .comment-action-button:hover, body main .comment-edit-section .comment-action-button:hover, body main .comment-reply-section .comment-action-button:hover {
+  background-color: hsl(239deg, 57%, 85%);
+}
+body main .comment-create {
+  padding: 1.5rem;
+}
+body footer {
+  padding-bottom: 0.5rem;
+}
+body footer .attribution {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #8f8f8f;
+}
+body footer .attribution a {
+  color: #7881aa;
+  font-weight: 400;
+}/*# sourceMappingURL=index.css.map */
