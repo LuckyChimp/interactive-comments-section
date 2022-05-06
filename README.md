@@ -32,7 +32,7 @@ Users are able to:
 
 ### Link
 
-- Solution URL: [https://interactive-comments-section-xi.vercel.app/](https://interactive-comments-section-xi.vercel.app/)
+- Solution URL: [https://interactive-comments-section-xi.vercel.app/](https://interactive-comments-section-xi.vercel.app/) (hosted on [Vercel](https://vercel.com/))
 
 ## My process
 
