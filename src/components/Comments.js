@@ -24,14 +24,38 @@ const Comments = ({ comments, currentUser, onVoteClick, onDeleteClick, onUpdateC
 
     return (
         <div className="comments">
-                {sortedComments().map(comment => (
-                    <div key={comment.id} className="comment-wrapper">
-                        <Comment comment={comment} own={currentUser.username === comment.user.username} onVoteClick={onVoteClick} onDeleteClick={onDeleteClick} onUpdateClick={onUpdateClick} onAddReplyClick={() => setEditModes(toggleEditMode(comment.id))} />
-                        {currentUser.username !== comment.user.username && editModes[comment.id]
-                            && <CreateReply currentUser={currentUser} replyingTo={{ "id": comment.id, "username": comment.user.username }} onReplyClick={onReplyClick} hideMe={() => setEditModes(toggleEditMode(comment.id))} />}
-                        {comment.replies.length > 0 ? <CommentReplies replies={comment.replies} currentUser={currentUser} onVoteClick={onVoteClick} onDeleteClick={onDeleteClick} onUpdateClick={onUpdateClick} onReplyClick={onReplyClick} /> : ''}
-                    </div>
-                ))}
+            {sortedComments().map(comment => (
+                <div
+                    key={comment.id}
+                    className="comment-wrapper">
+                    <Comment
+                        comment={comment}
+                        own={currentUser.username === comment.user.username}
+                        onVoteClick={onVoteClick} onDeleteClick={onDeleteClick}
+                        onUpdateClick={onUpdateClick}
+                        onAddReplyClick={() => setEditModes(toggleEditMode(comment.id))}
+                    />
+                    {(currentUser.username !== comment.user.username && editModes[comment.id]) &&
+                        <CreateReply
+                            currentUser={currentUser}
+                            replyingTo={{ "id": comment.id, "username": comment.user.username }}
+                            onReplyClick={onReplyClick}
+                            hideMe={() => setEditModes(toggleEditMode(comment.id))}
+                        />
+                    }
+                    {comment.replies.length > 0
+                        ? <CommentReplies
+                            replies={comment.replies}
+                            currentUser={currentUser}
+                            onVoteClick={onVoteClick}
+                            onDeleteClick={onDeleteClick}
+                            onUpdateClick={onUpdateClick}
+                            onReplyClick={onReplyClick}
+                        />
+                        : ''
+                    }
+                </div>
+            ))}
         </div>
     )
 };

@@ -7,12 +7,26 @@ const CreateReply = ({ currentUser, replyingTo, onReplyClick, hideMe }) => {
 
     return (
         <div className="comment-reply-section">
-            <img src={avatar} className="comment-author-profile-photo" alt="author"></img>
-            <textarea onInput={e => setText(e.target.value)} value={text} className="comment-input" placeholder="Add a reply..." rows="3" autoFocus></textarea>
-            <button onClick={() => {
-                hideMe();
-                return onReplyClick(replyingTo, text);
-            }} className="comment-reply comment-action-button">Reply</button>
+            <img
+                src={avatar}
+                className="comment-author-profile-photo"
+                alt="author">
+            </img>
+            <textarea
+                onInput={e => setText(e.target.value)}
+                value={text}
+                className="comment-input"
+                placeholder="Add a reply..."
+                rows="3"
+                autoFocus />
+            <button
+                onClick={() => {
+                    hideMe();
+                    return onReplyClick(replyingTo, text);
+                }}
+                className="comment-reply comment-action-button">
+                Reply
+            </button>
         </div>
     )
 }

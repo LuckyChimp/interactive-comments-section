@@ -265,13 +265,25 @@ function App() {
     return (
         <>
             <main>
-                {comments && <Comments comments={comments} currentUser={currentUser} onVoteClick={updateScore}
-                    onDeleteClick={id => {
-                        showDeleteModal();
-                        setDeleteCommentID(id);
-                    }}
-                onUpdateClick={updateCommentText} onReplyClick={createReply} />}
-                {currentUser && <CreateComment currentUser={currentUser} onCommentSendClick={createComment} />}
+                {comments &&
+                    <Comments
+                        comments={comments}
+                        currentUser={currentUser}
+                        onVoteClick={updateScore}
+                        onDeleteClick={id => {
+                            showDeleteModal();
+                            setDeleteCommentID(id);
+                        }}
+                        onUpdateClick={updateCommentText}
+                        onReplyClick={createReply}
+                    />
+                }
+                {currentUser &&
+                    <CreateComment
+                        currentUser={currentUser}
+                        onCommentSendClick={createComment}
+                    />
+                }
             </main>
             <footer>
                 <div className="attribution">
@@ -280,12 +292,15 @@ function App() {
                 </div>
             </footer>
 
-            {deleteModalVisible && <DeleteModal onCancelClick={hideDeleteModal} 
-                onDeleteClick={() => {
-                    deleteComment();
-                    hideDeleteModal();
-                }}
-            />}
+            {deleteModalVisible &&
+                <DeleteModal
+                    onCancelClick={hideDeleteModal} 
+                    onDeleteClick={() => {
+                        deleteComment();
+                        hideDeleteModal();
+                    }}
+                />
+            }
         </>
     );
 }
