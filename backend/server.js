@@ -10,7 +10,7 @@ const port = process.env.PORT || 5000;
 // Connect to the database
 mongoose
     .connect(process.env.DB)
-    .then(() => console.log(`Database conncected successfully`))
+    .then(() => console.log(`Database connected successfully`))
     .catch((err) => console.log(err));
 
 // ??? Since mongoose's Promise is deprecated, we override it with Node's Promise

@@ -5,7 +5,7 @@ const Comment = require('../models/comment');
 
 // GET users - get all users
 router.get('/users', (req, res, next) => {
-    User.find({}, 'username') // TODO try to remove 2nd arg 'username' and look for change in output
+    User.find({})
         .then((data) => res.json(data))
         .catch(next);
 });
