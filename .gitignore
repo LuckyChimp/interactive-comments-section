@@ -1,1 +1,4 @@
+.env
 node_modules
+mongodb-backup
+.DS_Store
