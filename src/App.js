@@ -10,7 +10,7 @@ function App() {
 	const [deleteModalVisible, setDeleteModalVisible] = useState(false);
 	const [deleteCommentID, setDeleteCommentID] = useState(null);
 
-	const DB_URL = 'https://comments-db-beta.vercel.app/';
+	const DB_URL = 'https://comments-db-beta.vercel.app';
 
 	useEffect(() => {
 		const getCurrentUser = async () => {
@@ -43,7 +43,7 @@ function App() {
 
 	// Fetch current user
 	const fetchCurrentUser = async () => {
-		const res = await fetch(`/* ${DB_URL} *//currentUser`);
+		const res = await fetch(`${DB_URL}/currentUser`);
 		const data = await res.json();
 
 		return data;
