@@ -43,7 +43,7 @@ Users are able to:
 - Flexbox
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
-- REST API that holds all the necessary data, created with JSON Server (see below), hosted on [Heroku](https://heroku.com/)
+- REST API that holds all the necessary data, created with JSON Server (see below), hosted on [Vercel](https://vercel.com/)
 
 ### Useful resource
 
