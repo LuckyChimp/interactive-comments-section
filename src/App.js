@@ -13,6 +13,7 @@ function App() {
 	const DB_URL = 'https://comments-db-beta.vercel.app';
 
 	useEffect(() => {
+		// fetch and set data
 		const getCurrentUser = async () => {
 			const currentUserFromServer = await fetchCurrentUser();
 			setCurrentUser(currentUserFromServer);
@@ -25,21 +26,32 @@ function App() {
 
 		getCurrentUser();
 		getComments();
-	}, []);
 
-	// Handles click outside of modal popup and closes delete modal
-	window.onclick = (event) => {
-		if (event.target === document.getElementById('delete-modal')) {
-			hideDeleteModal();
-		}
-	};
+		// functions for 'window' events
+		// onDeleteModalOutsideClick handles click outside of modal popup and closes delete modal
+		const onDeleteModalOutsideClick = (event) => {
+			if (event.target === document.getElementById('delete-modal')) {
+				hideDeleteModal();
+			}
+		};
 
-	// Handles escape key press and closes delete modal
-	window.onkeydown = (event) => {
-		if (event.code === 'Escape' && deleteModalVisible) {
-			hideDeleteModal();
-		}
-	};
+		// onEscKeyPress handles escape key press and closes delete modal
+		const onEscKeyPress = (event) => {
+			if (event.code === 'Escape' && deleteModalVisible) {
+				hideDeleteModal();
+			}
+		};
+
+		// register window events
+		window.addEventListener('click', onDeleteModalOutsideClick);
+		window.addEventListener('keydown', onEscKeyPress);
+
+		return () => {
+			// unregister window events
+			window.removeEventListener('click', onDeleteModalOutsideClick);
+			window.removeEventListener('keydown', onEscKeyPress);
+		};
+	}, [deleteModalVisible]);
 
 	// Fetch current user
 	const fetchCurrentUser = async () => {
