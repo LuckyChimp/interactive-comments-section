@@ -28,7 +28,7 @@ Users are able to:
 
 ### Screenshot
 
-![](./screenshot.png)
+![](./frontend/screenshot.png)
 
 ### Link
 
