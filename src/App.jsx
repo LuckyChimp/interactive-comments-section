@@ -3,6 +3,8 @@ import Comments from './components/Comments';
 import CreateComment from './components/CreateComment';
 import DeleteModal from './components/DeleteModal';
 
+import './App.scss';
+
 function App() {
 	const [currentUser, setCurrentUser] = useState(null);
 	const [comments, setComments] = useState(null);
