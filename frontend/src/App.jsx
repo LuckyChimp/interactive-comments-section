@@ -12,8 +12,6 @@ function App() {
 	const [deleteModalVisible, setDeleteModalVisible] = useState(false);
 	const [deleteCommentID, setDeleteCommentID] = useState(null);
 
-	const DB_URL = 'https://comments-db-beta.vercel.app';
-
 	useEffect(() => {
 		// fetch and set data
 		const getCurrentUser = async () => {
@@ -57,7 +55,7 @@ function App() {
 
 	// Fetch current user
 	const fetchCurrentUser = async () => {
-		const res = await fetch(`${DB_URL}/currentUser`);
+		const res = await fetch(`${process.env.REACT_APP_DB_URL}/currentUser`);
 		const data = await res.json();
 
 		return data;
@@ -65,7 +63,7 @@ function App() {
 
 	// Fetch comments
 	const fetchComments = async () => {
-		const res = await fetch(`${DB_URL}/comments`);
+		const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments`);
 		const data = await res.json();
 
 		return data;
@@ -125,7 +123,7 @@ function App() {
 		const updCommentOrReply = { ...comment, score: comment.score + change };
 		const updComment = await getParentWithComment(updCommentOrReply);
 
-		const res = await fetch(`${DB_URL}/comments/${updComment.id}`, {
+		const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments/${updComment.id}`, {
 			method: 'PUT',
 			headers: {
 				'Content-type': 'application/json'
@@ -147,7 +145,7 @@ function App() {
 				1
 			);
 
-			await fetch(`${DB_URL}/comments/${parentComment.id}`, {
+			await fetch(`${process.env.REACT_APP_DB_URL}/comments/${parentComment.id}`, {
 				method: 'PUT',
 				headers: {
 					'Content-type': 'application/json'
@@ -157,7 +155,7 @@ function App() {
 
 			setComments(comments.map((comment) => (comment.id === parentComment.id ? parentComment : comment)));
 		} else {
-			await fetch(`${DB_URL}/comments/${deleteCommentID}`, {
+			await fetch(`${process.env.REACT_APP_DB_URL}/comments/${deleteCommentID}`, {
 				method: 'DELETE'
 			});
 
@@ -211,7 +209,7 @@ function App() {
 			replies: []
 		};
 
-		const res = await fetch(`${DB_URL}/comments`, {
+		const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments`, {
 			method: 'POST',
 			headers: {
 				'Content-type': 'application/json'
@@ -235,7 +233,7 @@ function App() {
 			: { ...(await getCommentByID(id)), content: textContent };
 		const updComment = await getParentWithComment(updCommentOrReply);
 
-		const res = await fetch(`${DB_URL}/comments/${updComment.id}`, {
+		const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments/${updComment.id}`, {
 			method: 'PUT',
 			headers: {
 				'Content-type': 'application/json'
@@ -266,7 +264,7 @@ function App() {
 		let comment = isReply(commentOrReply) ? await getParentWithComment(commentOrReply) : commentOrReply;
 		comment.replies = [...comment.replies, reply];
 
-		const res = await fetch(`${DB_URL}/comments/${comment.id}`, {
+		const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments/${comment.id}`, {
 			method: 'PUT',
 			headers: {
 				'Content-type': 'application/json'
