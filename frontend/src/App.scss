@@ -130,6 +130,10 @@ body {
                             &:hover:not(:disabled) {
                                 color: $prim_modBlue;
                             }
+
+                            .comment-voter-downvote-icon, .comment-voter-upvote-icon {
+                                transform: scale(0.9);
+                            }
                         }
         
                         .comment-voter-score {
