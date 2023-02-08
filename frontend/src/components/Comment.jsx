@@ -83,7 +83,7 @@ const Comment = ({ comment }) => {
             <div className="comment-main">
                 <div className="comment-main-header">
                     <div className="comment-main-header-info">
-                        <LazyAvatar userID={comment.user} className="comment-author-profile-photo" alt="author" />
+                        <LazyAvatar userID={comment.user} width="2rem" height="2rem" className="comment-author-profile-photo" alt="author" />
                         <span className="comment-author">{comment.user.username}</span>
                         {own
                             ? <span className="comment-owner-tag">you</span>

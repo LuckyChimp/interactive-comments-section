@@ -168,10 +168,6 @@ body {
                                     margin-right: calc($space_inComment/2);
                                 }
 
-                                .comment-author-profile-photo {
-                                    width: 2rem;
-                                }
-
                                 .comment-author {
                                     color: $neut_darkBlue;
                                     font-weight: 500;
@@ -286,7 +282,6 @@ body {
             background-color: $neut_white;
 
             .comment-author-profile-photo {
-                width: 2.5rem;
                 flex-shrink: 0;
             }
 
@@ -406,8 +401,6 @@ body {
     }
 
     .loading-spinner {
-        width: 2.5rem;
-        height: 2.5rem;
         border: 4px solid $neut_liGray;
         border-top: 4px solid $neut_grayishBlue;
         border-radius: 50%;

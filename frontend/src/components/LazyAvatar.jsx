@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchUser } from "../api";
 
-const LazyAvatar = ({ userID, ...props }) => {
+const LazyAvatar = ({ userID, width, height, ...props }) => {
     const [avatar, setAvatar] = useState(null);
     const [avatarIsLoading, setAvatarIsLoading] = useState(false);
 
@@ -30,16 +30,16 @@ const LazyAvatar = ({ userID, ...props }) => {
 
     return (
         <div>
-            {avatarIsLoading && <LoadingSpinner />}
-            <img src={avatar} {...props} style={{ display: avatarIsLoading ? 'none' : 'initial' }} />
+            {avatarIsLoading && <LoadingSpinner width={width} height={height} />}
+            <img src={avatar} {...props} style={{ display: avatarIsLoading ? 'none' : 'initial', width: width }} />
         </div>
     );
 }
 
-const LoadingSpinner = () => {
+const LoadingSpinner = ({ width, height }) => {
     return (
         <div className="loading-spinner-container">
-            <div className="loading-spinner"></div>
+            <div className="loading-spinner" style={{ width: width, height: height }}></div>
         </div>
     );
 }
