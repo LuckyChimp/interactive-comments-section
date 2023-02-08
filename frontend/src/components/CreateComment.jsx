@@ -1,9 +1,11 @@
 import { useState } from "react";
 
-const CreateComment = ({ currentUser, onCommentSendClick }) => {
+const CreateComment = ({ }) => {
+    const currentUser = null;
+
     const [text, setText] = useState('');
 
-    const avatar = require(`../${currentUser.image.png}`);
+    const avatar = currentUser ? require(`../${currentUser.image.png}`) : '/';
 
     return (
         <div className="comment-create">
@@ -21,7 +23,7 @@ const CreateComment = ({ currentUser, onCommentSendClick }) => {
                 autoFocus />
             <button
                 onClick={() => {
-                    onCommentSendClick(text);
+                    // onCommentSendClick(text);
                     setText('');
                 }}
                 className="comment-action-button">

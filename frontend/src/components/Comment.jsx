@@ -5,12 +5,15 @@ import { ReactComponent as ReplyIcon } from "../assets/images/icon-reply.svg";
 import { ReactComponent as DeleteIcon } from "../assets/images/icon-delete.svg";
 import { ReactComponent as EditIcon } from "../assets/images/icon-edit.svg";
 
-const Comment = ({ comment, own, replyingTo, onVoteClick, onDeleteClick, onUpdateClick, onAddReplyClick }) => {
+const Comment = ({ comment }) => {
+    const own = false;
+    const replyingTo = 'placeholder';
+
     const [voted, setVoted] = useState(false);
     const [editMode, setEditMode] = useState(false);
     const [text, setText] = useState(replyingTo ? '@'.concat(replyingTo, ' ', comment.content) : comment.content);
 
-    const avatar = require(`../${comment.user.image.png}`);
+    const avatar = comment ? require(`../${comment.user.image.png}`) : '/';
 
     const timestampToString = (timestamp) => {
         const now = Date.now();
@@ -55,10 +58,10 @@ const Comment = ({ comment, own, replyingTo, onVoteClick, onDeleteClick, onUpdat
                         } else {
                             return () => { };
                         }
-                        return onVoteClick(comment.id, +1);
+                        // return onVoteClick(comment.id, +1);
                     }}
                     className="comment-voter-upvote">
-                    <PlusIcon className="comment-voter-upvote-icon"/>
+                    <PlusIcon className="comment-voter-upvote-icon" />
                 </button>
                 <span className="comment-voter-score">{comment.score}</span>
                 <button
@@ -71,10 +74,10 @@ const Comment = ({ comment, own, replyingTo, onVoteClick, onDeleteClick, onUpdat
                         } else {
                             return () => { };
                         }
-                        return onVoteClick(comment.id, -1);
+                        // return onVoteClick(comment.id, -1);
                     }}
                     className="comment-voter-downvote">
-                    <MinusIcon className="comment-voter-downvote-icon"/>
+                    <MinusIcon className="comment-voter-downvote-icon" />
                 </button>
             </div>
             <div className="comment-main">
@@ -95,7 +98,7 @@ const Comment = ({ comment, own, replyingTo, onVoteClick, onDeleteClick, onUpdat
                     <div className="comment-main-header-actions">
                         {!own
                             ? <button
-                                onClick={onAddReplyClick}
+                                onClick={() => { }}
                                 className="comment-main-header-reply comment-main-header-action">
                                 <ReplyIcon className="comment-main-header-reply-icon comment-main-header-action-icon" />
                                 Reply
@@ -104,7 +107,7 @@ const Comment = ({ comment, own, replyingTo, onVoteClick, onDeleteClick, onUpdat
                         }
                         {own
                             ? <button
-                                onClick={() => onDeleteClick(comment.id)}
+                                onClick={() => { }}
                                 className="comment-main-header-delete comment-main-header-action">
                                 <DeleteIcon className="comment-main-header-delete-icon comment-main-header-action-icon" />
                                 Delete
@@ -139,7 +142,7 @@ const Comment = ({ comment, own, replyingTo, onVoteClick, onDeleteClick, onUpdat
                         />
                         <button
                             onClick={() => {
-                                onUpdateClick(comment.id, text);
+                                // onUpdateClick(comment.id, text);
                                 setEditMode(false);
                             }}
                             className="comment-update comment-action-button">

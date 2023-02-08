@@ -1,24 +1,16 @@
 import Comment from "./Comment";
 import CreateReply from "./CreateReply";
-import { useState } from "react";
 
-const CommentReplies = ({ replies, currentUser, onVoteClick, onDeleteClick, onUpdateClick, onReplyClick }) => {
-    const [editModes, setEditModes] = useState(new Array(replies.length).fill(undefined));
+const CommentReplies = ({ replies }) => {
 
     const sortedReplies = () => {
+        if (!replies) {
+            return [];
+        }
+
         const sortedReplies = replies.sort((a, b) => a.createdAt - b.createdAt);
         return sortedReplies;
     };
-
-    function toggleEditMode(index) {
-        const _editModes = [...editModes];
-        if (_editModes[index] === undefined || _editModes[index] === false) {
-            _editModes[index] = true;
-        } else if (_editModes[index] === true) {
-            _editModes[index] = false;
-        }
-        return _editModes;
-    }
 
     return (
         <div className="comment-replies">
@@ -30,21 +22,12 @@ const CommentReplies = ({ replies, currentUser, onVoteClick, onDeleteClick, onUp
                         className="comment-wrapper">
                         <Comment
                             comment={reply}
-                            own={currentUser.username === reply.user.username}
-                            replyingTo={reply.replyingTo}
-                            onVoteClick={onVoteClick}
-                            onDeleteClick={onDeleteClick}
-                            onUpdateClick={onUpdateClick}
-                            onAddReplyClick={() => setEditModes(toggleEditMode(reply.id))}
                         />
-                        {(currentUser.username !== reply.user.username && editModes[reply.id]) &&
-                            <CreateReply
-                                currentUser={currentUser}
-                                replyingTo={{ "id": reply.id, "username": reply.user.username }}
-                                onReplyClick={onReplyClick}
-                                hideMe={() => setEditModes(toggleEditMode(reply.id))}
-                            />
-                        }
+                        <CreateReply
+                            replyingTo={{ "id": reply.id, "username": reply.user.username }}
+                            onReplyClick={() => { }}
+                            hideMe={() => { }}
+                        />
                     </div>
                 )}
             </div>

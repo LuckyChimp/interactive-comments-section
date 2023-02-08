@@ -1,9 +1,12 @@
 import { useState } from "react";
 
-const CreateReply = ({ currentUser, replyingTo, onReplyClick, hideMe }) => {
+const CreateReply = ({ }) => {
+    const currentUser = null;
+    const replyingTo = 'placeholder';
+
     const [text, setText] = useState('');
 
-    const avatar = require(`../${currentUser.image.png}`);
+    const avatar = currentUser ? require(`../${currentUser.image.png}`) : '/';
 
     return (
         <div className="comment-reply-section">
@@ -21,8 +24,8 @@ const CreateReply = ({ currentUser, replyingTo, onReplyClick, hideMe }) => {
                 autoFocus />
             <button
                 onClick={() => {
-                    hideMe();
-                    return onReplyClick(replyingTo, text);
+                    // hideMe();
+                    // return onReplyClick(replyingTo, text);
                 }}
                 className="comment-reply comment-action-button">
                 Reply
