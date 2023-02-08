@@ -1,4 +1,6 @@
 import { useState } from "react";
+
+import LazyAvatar from "./LazyAvatar";
 import { ReactComponent as PlusIcon } from "../assets/images/icon-plus.svg";
 import { ReactComponent as MinusIcon } from "../assets/images/icon-minus.svg";
 import { ReactComponent as ReplyIcon } from "../assets/images/icon-reply.svg";
@@ -12,8 +14,6 @@ const Comment = ({ comment }) => {
     const [voted, setVoted] = useState(false);
     const [editMode, setEditMode] = useState(false);
     const [text, setText] = useState(replyingTo ? '@'.concat(replyingTo, ' ', comment.content) : comment.content);
-
-    const avatar = comment ? require(`../${comment.user.image.png}`) : '/';
 
     const timestampToString = (timestamp) => {
         const now = Date.now();
@@ -83,11 +83,7 @@ const Comment = ({ comment }) => {
             <div className="comment-main">
                 <div className="comment-main-header">
                     <div className="comment-main-header-info">
-                        <img
-                            src={avatar}
-                            alt="author"
-                            className="comment-author-profile-photo"
-                        />
+                        <LazyAvatar userID={comment.user} className="comment-author-profile-photo" alt="author" />
                         <span className="comment-author">{comment.user.username}</span>
                         {own
                             ? <span className="comment-owner-tag">you</span>

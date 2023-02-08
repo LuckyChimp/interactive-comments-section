@@ -1,20 +1,16 @@
 import { useState } from "react";
 
+import LazyAvatar from "./LazyAvatar";
+
 const CreateReply = ({ }) => {
     const currentUser = null;
     const replyingTo = 'placeholder';
 
     const [text, setText] = useState('');
 
-    const avatar = currentUser ? require(`../${currentUser.image.png}`) : '/';
-
     return (
         <div className="comment-reply-section">
-            <img
-                src={avatar}
-                className="comment-author-profile-photo"
-                alt="author">
-            </img>
+            <LazyAvatar userID={process.env.REACT_APP_CURRENT_USER_ID} className="comment-author-profile-photo" alt="author" />
             <textarea
                 onInput={e => setText(e.target.value)}
                 value={text}

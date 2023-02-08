@@ -26,7 +26,7 @@ const LazyAvatar = ({ userID, ...props }) => {
         return () => {
             active = false;
         };
-    }, []);
+    }, [userID]);
 
     return (
         <div>

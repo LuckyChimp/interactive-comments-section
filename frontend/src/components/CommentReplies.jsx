@@ -18,7 +18,7 @@ const CommentReplies = ({ replies }) => {
             <div className="comment-replies-wrapper">
                 {sortedReplies().map(reply =>
                     <div
-                        key={reply.id}
+                        key={reply._id}
                         className="comment-wrapper">
                         <Comment
                             comment={reply}

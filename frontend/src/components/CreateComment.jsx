@@ -1,19 +1,12 @@
 import { useState } from "react";
+import LazyAvatar from './LazyAvatar';
 
 const CreateComment = ({ }) => {
-    const currentUser = null;
-
     const [text, setText] = useState('');
-
-    const avatar = currentUser ? require(`../${currentUser.image.png}`) : '/';
 
     return (
         <div className="comment-create">
-            <img
-                src={avatar}
-                alt="author"
-                className="comment-author-profile-photo"
-            />
+            <LazyAvatar userID={process.env.REACT_APP_CURRENT_USER_ID} className="comment-author-profile-photo" alt="author" />
             <textarea
                 onInput={e => setText(e.target.value)}
                 value={text}
