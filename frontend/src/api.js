@@ -31,4 +31,17 @@ const fetchComment = async (commentID) => {
     }
 }
 
-export { fetchUser, fetchComments, fetchComment };
+// in the DB comment.replies only stores the ids as a reference to the relative comments - this function accepts these ids, fetches the relative comments and returns them
+const fetchReplies = (replyIDs) => {
+    const replies = [];
+
+    for (const replyID of replyIDs) {
+        fetchComment(replyID).then((reply => {
+            replies.push(reply);
+        }));
+    }
+
+    return replies;
+};
+
+export { fetchUser, fetchComments, fetchComment, fetchReplies };

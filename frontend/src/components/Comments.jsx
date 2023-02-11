@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { fetchComments, fetchComment } from "../api";
+import { fetchComments, fetchReplies } from "../api";
 import Comment from "./Comment";
 import CreateReply from "./CreateReply";
 import CommentReplies from "./CommentReplies";
@@ -23,17 +23,6 @@ const Comments = ({ }) => {
         }
     }, []);
 
-    // in the DB comment.replies only stores the ids as a reference to the relative comments - this function accepts these ids, fetches the relative comments and returns them
-    const fetchCommentReplies = (replyIDArray) => {
-        const replies = [];
-        replyIDArray.forEach(async (replyID) => {
-            const comment = await fetchComment(replyID);
-            replies.push(comment);
-        });
-
-        return replies;
-    };
-
 
     return (
         <div className="comments">
@@ -47,7 +36,7 @@ const Comments = ({ }) => {
                     <CreateReply />
                     {comment.replies.length > 0
                         ? <CommentReplies
-                            replies={fetchCommentReplies(comment.replies)}
+                            replies={fetchReplies(comment.replies)}
                         />
                         : ''
                     }
