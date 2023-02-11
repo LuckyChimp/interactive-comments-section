@@ -1,22 +1,34 @@
 const fetchUser = async (userID) => {
-    const res = await fetch(`${process.env.REACT_APP_DB_URL}/users/${userID}`);
-    const user = await res.json();
-
-    return user;
+    try {
+        const res = await fetch(`${process.env.REACT_APP_DB_URL}/users/${userID}`);
+        const user = await res.json();
+    
+        return user;
+    } catch (error) {
+        console.error(error);
+    }
 };
 
 const fetchComments = async () => {
-    const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments`);
-    const comments = await res.json();
-    
-    return comments;
+    try {
+        const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments`);
+        const comments = await res.json();
+        
+        return comments;
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 const fetchComment = async (commentID) => {
-    const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments/${commentID}`);
-    const comment = await res.json();
-    
-    return comment;
+    try {
+        const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments/${commentID}`);
+        const comment = await res.json();
+        
+        return comment;
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 export { fetchUser, fetchComments, fetchComment };
