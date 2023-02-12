@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 import { fetchComments, fetchReplies } from "../api";
+
 import Comment from "./Comment/Comment";
 import CreateReply from "./CreateReply";
 import CommentReplies from "./CommentReplies";

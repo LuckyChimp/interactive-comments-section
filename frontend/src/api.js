@@ -44,4 +44,4 @@ const fetchReplies = (replyIDs) => {
     return replies;
 };
 
-export { fetchUser, fetchComments, fetchComment, fetchReplies };
+export { fetchUser, fetchComments, fetchReplies };
