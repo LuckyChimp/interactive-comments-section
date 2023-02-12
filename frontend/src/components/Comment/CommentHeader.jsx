@@ -1,5 +1,9 @@
+import { useState, useEffect } from "react";
+
 import DayJs from "dayjs";
 import RelativeTime from "dayjs/plugin/relativeTime";
+
+import { fetchUser } from "../../api";
 
 import LazyAvatar from "../LazyAvatar";
 import { ReactComponent as ReplyIcon } from "../../assets/images/icon-reply.svg";
@@ -20,10 +24,26 @@ const CommentHeader = ({ userID, createdAt, own, onEditClick }) => {
 }
 
 const HeaderInfo = ({ userID, createdAt, own }) => {
+    const [username, setUsername] = useState(null);
+
+    useEffect(() => {
+        let active = true;
+
+        fetchUser(userID).then(user => {
+            if (active) {
+                setUsername(user.username);
+            }
+        });
+
+        return () => {
+            active = false;
+        }
+    }, []);
+
     return (
         <div className="comment-main-header-info">
             <LazyAvatar userID={userID} width="2rem" height="2rem" className="comment-author-profile-photo" alt="author" />
-            <span className="comment-author">{userID}</span>
+            <span className="comment-author">{username}</span>
             {own
                 ? <span className="comment-owner-tag">you</span>
                 : ''
