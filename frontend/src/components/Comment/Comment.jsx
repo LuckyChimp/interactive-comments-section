@@ -5,7 +5,7 @@ import CommentHeader from "./CommentHeader";
 import CommentText from "./CommentText";
 import CommentEditSection from "./CommentEditSection";
 
-const Comment = ({ commentData }) => {
+const Comment = ({ commentData, onReplyClick }) => {
     const own = commentData.user === process.env.REACT_APP_CURRENT_USER_ID; // check if comment is from current user and set 'own' accordingly
     const replyingTo = commentData.replyingTo;
 
@@ -22,7 +22,7 @@ const Comment = ({ commentData }) => {
         <div className="comment">
             <CommentVoter score={commentData.score} own={own} />
             <div className="comment-main">
-                <CommentHeader userID={commentData.user} createdAt={commentData.createdAt} own={own} onEditClick={() => setEditMode(!editMode)} />
+                <CommentHeader userID={commentData.user} createdAt={commentData.createdAt} own={own} onReplyClick={() => onReplyClick()} onEditClick={() => setEditMode(!editMode)} />
                 {!editMode && <CommentText text={text} replyingTo={replyingTo} />}
                 {(own && editMode) && <CommentEditSection text={text} onTextareaChange={text => setText(text)} onUpdateClick={() => onUpdateClick()} />
                 }

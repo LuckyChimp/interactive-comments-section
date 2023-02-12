@@ -41,22 +41,30 @@ const CommentReplies = ({ replyIDs }) => {
             <div className="vertical-indentation-line"></div>
             <div className="comment-replies-wrapper">
                 {repliesData.sort(sort).map(replyData =>
-                    <div
-                        key={replyData._id}
-                        className="comment-wrapper">
-                        <Comment
-                            commentData={replyData}
-                        />
-                        <CreateReply
-                            replyingTo={{ "id": replyData.id, "username": replyData.user.username }}
-                            onReplyClick={() => { }}
-                            hideMe={() => { }}
-                        />
-                    </div>
+                    <ReplyWrapper replyData={replyData} key={replyData._id} />
                 )}
             </div>
         </div>
     )
 }
+
+const ReplyWrapper = ({ replyData }) => {
+    const [replyMode, setReplyMode] = useState(false);
+
+    return (
+        <div className="comment-wrapper">
+            <Comment
+                commentData={replyData}
+                onReplyClick={() => setReplyMode(!replyMode)}
+            />
+            {replyMode && <CreateReply
+                replyingTo={{ "id": replyData.id, "username": replyData.user.username }}
+                onReplyClick={() => { }}
+                hideMe={() => { }}
+            />}
+        </div>
+    );
+
+};
 
 export default CommentReplies;

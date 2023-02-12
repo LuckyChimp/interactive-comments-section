@@ -7,11 +7,11 @@ import { ReactComponent as ReplyIcon } from "../../assets/images/icon-reply.svg"
 import { ReactComponent as DeleteIcon } from "../../assets/images/icon-delete.svg";
 import { ReactComponent as EditIcon } from "../../assets/images/icon-edit.svg";
 
-const CommentHeader = ({ userID, createdAt, own, onEditClick }) => {
+const CommentHeader = ({ userID, createdAt, own, onReplyClick, onEditClick }) => {
     return (
         <div className="comment-main-header">
             <HeaderInfo userID={userID} createdAt={createdAt} own={own} />
-            <HeaderActions own={own} onEditClick={() => onEditClick()} />
+            <HeaderActions own={own} onReplyClick={() => onReplyClick()} onEditClick={() => onEditClick()} />
         </div>
     );
 }
@@ -76,12 +76,12 @@ const HeaderInfo = ({ userID, createdAt, own }) => {
     );
 };
 
-const HeaderActions = ({ own, onEditClick }) => {
+const HeaderActions = ({ own, onReplyClick, onEditClick }) => {
     return (
         <div className="comment-main-header-actions">
             {!own
                 ? <button
-                    onClick={() => { }}
+                    onClick={() => onReplyClick()}
                     className="comment-main-header-reply comment-main-header-action">
                     <ReplyIcon className="comment-main-header-reply-icon comment-main-header-action-icon" />
                     Reply
