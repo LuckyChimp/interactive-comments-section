@@ -75,9 +75,9 @@ const deleteComment = asyncHandler(async (req, res) => {
     }
 
     // delete reference of this comment in replies field of other comment
-    await Comment.updateOne({ replies: comment._id }, { $pull: { replies: req.params.id }});
+    await Comment.updateOne({ replies: comment._id }, { $pull: { replies: comment._id }});
 
-    res.status(200).json({ id: req.params.id });
+    res.status(200).json({ id: comment._id });
 });
 
 module.exports = {
