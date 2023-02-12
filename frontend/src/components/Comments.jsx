@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 
-import { fetchComments, fetchReplies } from "../api";
+import { fetchComments } from "../api";
 
 import Comment from "./Comment/Comment";
 import CreateReply from "./CreateReply";
 import CommentReplies from "./CommentReplies";
 
-const Comments = ({ }) => {
+const Comments = () => {
     const [commentsData, setCommentsData] = useState(null);
 
     useEffect(() => {
         let active = true; // implement active bool to prevent race conditions
 
-        fetchComments().then((comments) => {
+        fetchComments().then(comments => {
             if (active) {
                 setCommentsData(comments);
             }
@@ -24,22 +24,31 @@ const Comments = ({ }) => {
         }
     }, []);
 
+    const sort = (a, b) => {
+        if (a.score > b.score) {
+            return -1;
+        }
+        if (a.score < b.score) {
+            return 1;
+        }
+        return 0;
+    };
+
+    const isReply = (commentData) => {
+        return commentData.replyingTo ? true : false;
+    };
+
 
     return (
         <div className="comments">
-            {commentsData && commentsData.map(commentData => (
+            {commentsData && commentsData.sort(sort).map(commentData => (
                 <div
                     key={commentData._id}
                     className="comment-wrapper">
-                    <Comment
-                        commentData={commentData}
-                    />
+                    {!isReply(commentData) && <Comment commentData={commentData} />}
                     <CreateReply />
-                    {commentData.replies.length > 0
-                        ? <CommentReplies
-                            repliesData={fetchReplies(commentData.replies)}
-                        />
-                        : ''
+                    {commentData.replies.length > 0 &&
+                        <CommentReplies replyIDs={commentData.replies} />
                     }
                 </div>
             ))}
