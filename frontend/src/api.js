@@ -43,4 +43,21 @@ const fetchReplies = async (replyIDs) => {
     return replies;
 };
 
-export { fetchUser, fetchComments, fetchReplies };
+const updateCommentText = async (commentID, text) => {
+    try {
+        const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments/${commentID}`, {
+            method: 'PUT',
+			headers: {
+				'Content-type': 'application/json'
+			},
+			body: JSON.stringify({ content: text })
+        });
+        const data = await res.json();
+        
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export { fetchUser, fetchComments, fetchReplies, updateCommentText };
