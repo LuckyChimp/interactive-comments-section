@@ -1,30 +1,30 @@
-import Comment from "./Comment";
+import Comment from "./Comment/Comment";
 import CreateReply from "./CreateReply";
 
-const CommentReplies = ({ replies }) => {
+const CommentReplies = ({ repliesData }) => {
 
-    const sortedReplies = () => {
-        if (!replies) {
+    const sortedRepliesData = () => {
+        if (!repliesData) {
             return [];
         }
 
-        const sortedReplies = replies.sort((a, b) => a.createdAt - b.createdAt);
-        return sortedReplies;
+        const sortedRepliesData = repliesData.sort((a, b) => a.createdAt - b.createdAt);
+        return sortedRepliesData;
     };
 
     return (
         <div className="comment-replies">
             <div className="vertical-indentation-line"></div>
             <div className="comment-replies-wrapper">
-                {sortedReplies().map(reply =>
+                {sortedRepliesData().map(replyData =>
                     <div
-                        key={reply._id}
+                        key={replyData._id}
                         className="comment-wrapper">
                         <Comment
-                            comment={reply}
+                            commentData={replyData}
                         />
                         <CreateReply
-                            replyingTo={{ "id": reply.id, "username": reply.user.username }}
+                            replyingTo={{ "id": replyData.id, "username": replyData.user.username }}
                             onReplyClick={() => { }}
                             hideMe={() => { }}
                         />

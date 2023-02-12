@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
 
 import { fetchComments, fetchReplies } from "../api";
-import Comment from "./Comment";
+import Comment from "./Comment/Comment";
 import CreateReply from "./CreateReply";
 import CommentReplies from "./CommentReplies";
 
 const Comments = ({ }) => {
-    const [comments, setComments] = useState(null);
+    const [commentsData, setCommentsData] = useState(null);
 
     useEffect(() => {
         let active = true; // implement active bool to prevent race conditions
 
         fetchComments().then((comments) => {
             if (active) {
-                setComments(comments);
+                setCommentsData(comments);
             }
         });
 
@@ -26,17 +26,17 @@ const Comments = ({ }) => {
 
     return (
         <div className="comments">
-            {comments && comments.map(comment => (
+            {commentsData && commentsData.map(commentData => (
                 <div
-                    key={comment._id}
+                    key={commentData._id}
                     className="comment-wrapper">
                     <Comment
-                        comment={comment}
+                        commentData={commentData}
                     />
                     <CreateReply />
-                    {comment.replies.length > 0
+                    {commentData.replies.length > 0
                         ? <CommentReplies
-                            replies={fetchReplies(comment.replies)}
+                            repliesData={fetchReplies(commentData.replies)}
                         />
                         : ''
                     }
