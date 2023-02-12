@@ -7,83 +7,81 @@ const Comment = require('../models/commentModel');
 // @route   GET /api/comments
 // @access  Public
 const getComments = asyncHandler(async (req, res) => {
-    const comments = await Comment.find();
+	const comments = await Comment.find();
 
-    res.status(200).json(comments);
+	res.status(200).json(comments);
 });
 
 // @desc    Get comment
 // @route   GET /api/comments/:id
 // @access  Public
 const getComment = asyncHandler(async (req, res) => {
-    const comment = await Comment.findById(req.params.id);
+	const comment = await Comment.findById(req.params.id);
 
-    res.status(200).json(comment);
+	res.status(200).json(comment);
 });
 
 // @desc    Create comment
 // @route   POST /api/comments
 // @access  Public
 const createComment = asyncHandler(async (req, res) => {
-    try {
-        await Comment.validate(req.body);
-    } catch (error) {
-        res.status(400);
-        throw new Error(error);
-    }
+	try {
+		await Comment.validate(req.body);
+	} catch (error) {
+		res.status(400);
+		throw new Error(error);
+	}
 
-    const comment = await Comment.create(req.body);
+	const comment = await Comment.create(req.body);
 
-    res.status(200).json(comment);
+	res.status(200).json(comment);
 });
 
 // @desc    Update comment
 // @route   PUT /api/comments/:id
 // @access  Public
 const updateComment = asyncHandler(async (req, res) => {
-    const comment = await Comment.findById(req.params.id);
+	const comment = await Comment.findById(req.params.id);
 
-    if (!comment) {
-        res.status(400);
-        throw new Error('Comment not found');
-    }
+	if (!comment) {
+		res.status(400);
+		throw new Error('Comment not found');
+	}
 
-    const updatedComment = await Comment.findByIdAndUpdate(req.params.id, req.body, { new: true });
+	const updatedComment = await Comment.findByIdAndUpdate(req.params.id, req.body, { new: true });
 
-    res.status(200).json(updatedComment);
+	res.status(200).json(updatedComment);
 });
 
 // @desc    Delete comment
 // @route   DELETE /api/comments/:id
 // @access  Public
 const deleteComment = asyncHandler(async (req, res) => {
-    const comment = await Comment.findById(req.params.id);
+	const comment = await Comment.findById(req.params.id);
 
-    if (!comment) {
-        res.status(400);
-        throw new Error('Comment not found');
-    }
+	if (!comment) {
+		res.status(400);
+		throw new Error('Comment not found');
+	}
 
-    // delete comment itself if it exists
-    await comment.deleteOne();
+	// delete comment itself if it exists
+	await comment.deleteOne();
 
-    // delete all replies of this comment if they exist
-    if (comment.replies) {
-        for (const replyID of comment.replies) {
-            await Comment.deleteOne(replyID);
-        }
-    }
+	// delete all replies of this comment if they exist
+	if (comment.replies) {
+		await Comment.deleteMany({ _id: { $in: comment.replies } });
+	}
 
-    // delete reference of this comment in replies field of other comment
-    await Comment.updateOne({ replies: comment._id }, { $pull: { replies: comment._id }});
+	// delete all references of this comment in replies field of other comments
+	await Comment.updateMany({ replies: comment._id }, { $pull: { replies: comment._id } });
 
-    res.status(200).json({ id: comment._id });
+	res.status(200).json({ id: comment._id });
 });
 
 module.exports = {
-    getComments,
-    getComment,
-    createComment,
-    updateComment,
-    deleteComment
-}
+	getComments,
+	getComment,
+	createComment,
+	updateComment,
+	deleteComment
+};
