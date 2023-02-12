@@ -64,7 +64,18 @@ const deleteComment = asyncHandler(async (req, res) => {
         throw new Error('Comment not found');
     }
 
+    // delete comment itself if it exists
     await comment.deleteOne();
+
+    // delete all replies of this comment if they exist
+    if (comment.replies) {
+        for (const replyID of comment.replies) {
+            await Comment.deleteOne(replyID);
+        }
+    }
+
+    // delete reference of this comment in replies field of other comment
+    await Comment.updateOne({ replies: comment._id }, { $pull: { replies: req.params.id }});
 
     res.status(200).json({ id: req.params.id });
 });
