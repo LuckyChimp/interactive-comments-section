@@ -19,7 +19,7 @@ const getUser = asyncHandler(async (req, res) => {
 
 	if (!user) {
 		res.status(400);
-		throw new Error('Comment not found');
+		throw new Error('User not found');
 	}
 
 	res.status(200).json(user);
