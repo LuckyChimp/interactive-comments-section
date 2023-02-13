@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+
+import { fetchComments, deleteComment } from "./api";
+
 import Comments from './components/Comments';
 import CreateComment from './components/CreateComment';
 import DeleteModal from './components/DeleteModal';
@@ -6,10 +9,21 @@ import DeleteModal from './components/DeleteModal';
 import './App.scss';
 
 function App() {
+	const [commentsData, setCommentsData] = useState([]);
 
+	const [deleteCommentID, setDeleteCommentID] = useState(null);
 	const [deleteModalVisible, setDeleteModalVisible] = useState(false);
 
+
 	useEffect(() => {
+		let active = true; // implement active bool to prevent race conditions
+
+		fetchComments().then(commentsData => {
+			if (active) {
+				setCommentsData(commentsData);
+			}
+		});
+
 		// functions for 'window' events
 		// onDeleteModalOutsideClick handles click outside of modal popup and closes delete modal
 		const onDeleteModalOutsideClick = (event) => {
@@ -30,6 +44,7 @@ function App() {
 		window.addEventListener('keydown', onEscKeyPress);
 
 		return () => {
+			active = false;
 			// unregister window events
 			window.removeEventListener('click', onDeleteModalOutsideClick);
 			window.removeEventListener('keydown', onEscKeyPress);
@@ -50,7 +65,12 @@ function App() {
 	return (
 		<>
 			<main>
-				<Comments />
+				<Comments
+					commentsData={commentsData}
+					onDeleteClick={(commentID) => {
+						setDeleteCommentID(commentID);
+						showDeleteModal();
+					}} />
 				<CreateComment />
 			</main>
 			<footer>
@@ -71,8 +91,12 @@ function App() {
 				<DeleteModal
 					onCancelClick={hideDeleteModal}
 					onDeleteClick={() => {
-						// deleteComment();
-						hideDeleteModal();
+						deleteComment(deleteCommentID).then(({ id }) => {
+							fetchComments().then(commentsData => {
+								setCommentsData(commentsData);
+								hideDeleteModal();
+							});
+						});
 					}}
 				/>
 			)}

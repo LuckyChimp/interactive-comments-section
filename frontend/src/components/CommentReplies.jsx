@@ -5,7 +5,7 @@ import { fetchReplies } from "../api";
 import Comment from "./Comment/Comment";
 import CreateReply from "./CreateReply";
 
-const CommentReplies = ({ replyIDs }) => {
+const CommentReplies = ({ replyIDs, onDeleteClick }) => {
     const [repliesData, setRepliesData] = useState([]);
 
     useEffect(() => {
@@ -20,7 +20,7 @@ const CommentReplies = ({ replyIDs }) => {
         return () => {
             active = false;
         }
-    }, [replyIDs])
+    }, [replyIDs]);
 
     const sort = (a, b) => {
         const dateA = new Date(a.createdAt).getTime();
@@ -41,14 +41,14 @@ const CommentReplies = ({ replyIDs }) => {
             <div className="vertical-indentation-line"></div>
             <div className="comment-replies-wrapper">
                 {repliesData.sort(sort).map(replyData =>
-                    <ReplyWrapper replyData={replyData} key={replyData._id} />
+                    <ReplyWrapper replyData={replyData} onDeleteClick={(commentID) => onDeleteClick(commentID)} key={replyData._id} />
                 )}
             </div>
         </div>
     )
 }
 
-const ReplyWrapper = ({ replyData }) => {
+const ReplyWrapper = ({ replyData, onDeleteClick }) => {
     const [replyMode, setReplyMode] = useState(false);
 
     return (
@@ -56,6 +56,7 @@ const ReplyWrapper = ({ replyData }) => {
             <Comment
                 commentData={replyData}
                 onReplyClick={() => setReplyMode(!replyMode)}
+                onDeleteClick={(commentID) => onDeleteClick(commentID)}
             />
             {replyMode && <CreateReply
                 replyingTo={{ "id": replyData.id, "username": replyData.user.username }}

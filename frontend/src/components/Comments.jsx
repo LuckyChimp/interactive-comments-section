@@ -1,29 +1,10 @@
-import { useState, useEffect } from "react";
-
-import { fetchComments } from "../api";
+import { useState } from "react";
 
 import Comment from "./Comment/Comment";
 import CreateReply from "./CreateReply";
 import CommentReplies from "./CommentReplies";
 
-const Comments = () => {
-    const [commentsData, setCommentsData] = useState([]);
-
-    useEffect(() => {
-        let active = true; // implement active bool to prevent race conditions
-
-        fetchComments().then(comments => {
-            if (active) {
-                setCommentsData(comments);
-            }
-        });
-
-
-        return () => {
-            active = false;
-        }
-    }, []);
-
+const Comments = ({ commentsData, onDeleteClick }) => {
     const sort = (a, b) => {
         if (a.score > b.score) {
             return -1;
@@ -38,13 +19,13 @@ const Comments = () => {
     return (
         <div className="comments">
             {commentsData && commentsData.sort(sort).map(commentData => (
-                <CommentWrapper commentData={commentData} key={commentData._id} />
+                <CommentWrapper commentData={commentData} onDeleteClick={(commentID) => onDeleteClick(commentID)} key={commentData._id} />
             ))}
         </div>
     );
 };
 
-const CommentWrapper = ({ commentData }) => {
+const CommentWrapper = ({ commentData, onDeleteClick }) => {
     const [replyMode, setReplyMode] = useState(false);
 
     const isReply = (commentData) => {
@@ -53,10 +34,10 @@ const CommentWrapper = ({ commentData }) => {
 
     return (
         <div className="comment-wrapper">
-            {!isReply(commentData) && <Comment commentData={commentData} onReplyClick={() => setReplyMode(!replyMode)} />}
+            {!isReply(commentData) && <Comment commentData={commentData} onReplyClick={() => setReplyMode(!replyMode)} onDeleteClick={(commentID) => onDeleteClick(commentID)} />}
             {replyMode && <CreateReply />}
             {commentData.replies.length > 0 &&
-                <CommentReplies replyIDs={commentData.replies} />
+                <CommentReplies replyIDs={commentData.replies} onDeleteClick={(commentID) => onDeleteClick(commentID)} />
             }
         </div>
     );

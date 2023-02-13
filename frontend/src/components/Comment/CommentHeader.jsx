@@ -7,11 +7,11 @@ import { ReactComponent as ReplyIcon } from "../../assets/images/icon-reply.svg"
 import { ReactComponent as DeleteIcon } from "../../assets/images/icon-delete.svg";
 import { ReactComponent as EditIcon } from "../../assets/images/icon-edit.svg";
 
-const CommentHeader = ({ userID, createdAt, own, onReplyClick, onEditClick }) => {
+const CommentHeader = ({ userID, commentID, createdAt, own, onReplyClick, onDeleteClick, onEditClick }) => {
     return (
         <div className="comment-main-header">
             <HeaderInfo userID={userID} createdAt={createdAt} own={own} />
-            <HeaderActions own={own} onReplyClick={() => onReplyClick()} onEditClick={() => onEditClick()} />
+            <HeaderActions commentID={commentID} own={own} onReplyClick={() => onReplyClick()} onDeleteClick={(commentID) => onDeleteClick(commentID)} onEditClick={() => onEditClick()} />
         </div>
     );
 }
@@ -76,7 +76,7 @@ const HeaderInfo = ({ userID, createdAt, own }) => {
     );
 };
 
-const HeaderActions = ({ own, onReplyClick, onEditClick }) => {
+const HeaderActions = ({ commentID, own, onReplyClick, onDeleteClick, onEditClick }) => {
     return (
         <div className="comment-main-header-actions">
             {!own
@@ -90,7 +90,7 @@ const HeaderActions = ({ own, onReplyClick, onEditClick }) => {
             }
             {own
                 ? <button
-                    onClick={() => { }}
+                    onClick={() => onDeleteClick(commentID)}
                     className="comment-main-header-delete comment-main-header-action">
                     <DeleteIcon className="comment-main-header-delete-icon comment-main-header-action-icon" />
                     Delete
