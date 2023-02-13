@@ -6,21 +6,26 @@ const User = require('../models/userModel');
 // @route   GET /api/users
 // @access  Public
 const getUsers = asyncHandler(async (req, res) => {
-    const users = await User.find();
+	const users = await User.find();
 
-    res.status(200).json(users);
+	res.status(200).json(users);
 });
 
 // @desc    Get user
 // @route   GET /api/users/:id
 // @access  Public
 const getUser = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.params.id);
+	const user = await User.findById(req.params.id);
 
-    res.status(200).json(user);
+	if (!user) {
+		res.status(400);
+		throw new Error('Comment not found');
+	}
+
+	res.status(200).json(user);
 });
 
 module.exports = {
-    getUsers,
-    getUser
+	getUsers,
+	getUser
 };

@@ -18,6 +18,11 @@ const getComments = asyncHandler(async (req, res) => {
 const getComment = asyncHandler(async (req, res) => {
 	const comment = await Comment.findById(req.params.id);
 
+	if (!comment) {
+		res.status(400);
+		throw new Error('Comment not found');
+	}
+
 	res.status(200).json(comment);
 });
 
