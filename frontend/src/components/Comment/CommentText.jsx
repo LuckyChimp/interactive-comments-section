@@ -1,7 +1,12 @@
 const CommentText = ({ text, replyingTo }) => {
     return (
         <p className="comment-text">
-            {replyingTo && <span className="comment-text-recipient">@{replyingTo} </span>}
+            {
+                replyingTo &&
+                <span className="comment-text-recipient">
+                    @{replyingTo}
+                </span>
+            }
             {text}
         </p>
     );

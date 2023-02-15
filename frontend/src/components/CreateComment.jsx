@@ -11,7 +11,13 @@ const CreateComment = () => {
 
     return (
         <div className="comment-create">
-            <LazyAvatar userID={process.env.REACT_APP_CURRENT_USER_ID} width="2.5rem" height="2.5rem" className="comment-author-profile-photo" alt="author" />
+            <LazyAvatar
+                userID={process.env.REACT_APP_CURRENT_USER_ID}
+                width="2.5rem"
+                height="2.5rem"
+                className="comment-author-profile-photo"
+                alt="author"
+            />
             <textarea
                 onInput={e => setText(e.target.value)}
                 value={text}

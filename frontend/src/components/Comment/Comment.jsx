@@ -23,11 +23,34 @@ const Comment = ({ commentData, onReplyClick, onDeleteClick }) => {
 
     return (
         <div className="comment">
-            <CommentVoter score={commentData.score} own={own} />
+            <CommentVoter
+                score={commentData.score}
+                own={own}
+            />
             <div className="comment-main">
-                <CommentHeader userID={commentData.user} commentID={commentData._id} createdAt={commentData.createdAt} own={own} onReplyClick={() => onReplyClick()} onDeleteClick={(commentID) => onDeleteClick(commentID)} onEditClick={() => setEditMode(!editMode)} />
-                {!editMode && <CommentText text={text} replyingTo={replyingTo} />}
-                {(own && editMode) && <CommentEditSection text={text} onTextareaChange={text => setText(text)} onUpdateClick={() => onUpdateClick()} />
+                <CommentHeader
+                    userID={commentData.user}
+                    commentID={commentData._id}
+                    createdAt={commentData.createdAt}
+                    own={own}
+                    onReplyClick={() => onReplyClick()}
+                    onDeleteClick={(commentID) => onDeleteClick(commentID)}
+                    onEditClick={() => setEditMode(!editMode)}
+                />
+                {
+                    !editMode &&
+                    <CommentText
+                        text={text}
+                        replyingTo={replyingTo}
+                    />
+                }
+                {
+                    (own && editMode) &&
+                    <CommentEditSection
+                        text={text}
+                        onTextareaChange={text => setText(text)}
+                        onUpdateClick={() => onUpdateClick()}
+                    />
                 }
             </div>
         </div>

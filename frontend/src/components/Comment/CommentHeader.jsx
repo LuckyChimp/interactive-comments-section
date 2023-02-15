@@ -10,8 +10,18 @@ import { ReactComponent as EditIcon } from "../../assets/images/icon-edit.svg";
 const CommentHeader = ({ userID, commentID, createdAt, own, onReplyClick, onDeleteClick, onEditClick }) => {
     return (
         <div className="comment-main-header">
-            <HeaderInfo userID={userID} createdAt={createdAt} own={own} />
-            <HeaderActions commentID={commentID} own={own} onReplyClick={() => onReplyClick()} onDeleteClick={(commentID) => onDeleteClick(commentID)} onEditClick={() => onEditClick()} />
+            <HeaderInfo
+                userID={userID}
+                createdAt={createdAt}
+                own={own}
+            />
+            <HeaderActions
+                commentID={commentID}
+                own={own}
+                onReplyClick={() => onReplyClick()}
+                onDeleteClick={(commentID) => onDeleteClick(commentID)}
+                onEditClick={() => onEditClick()}
+            />
         </div>
     );
 }
@@ -65,7 +75,13 @@ const HeaderInfo = ({ userID, createdAt, own }) => {
 
     return (
         <div className="comment-main-header-info">
-            <LazyAvatar userID={userID} width="2rem" height="2rem" className="comment-author-profile-photo" alt="author" />
+            <LazyAvatar
+                userID={userID}
+                width="2rem"
+                height="2rem"
+                className="comment-author-profile-photo"
+                alt="author"
+            />
             <span className="comment-author">{username}</span>
             {own
                 ? <span className="comment-owner-tag">you</span>

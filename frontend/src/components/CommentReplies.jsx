@@ -41,7 +41,11 @@ const CommentReplies = ({ replyIDs, onDeleteClick }) => {
             <div className="vertical-indentation-line"></div>
             <div className="comment-replies-wrapper">
                 {repliesData.sort(sort).map(replyData =>
-                    <ReplyWrapper replyData={replyData} onDeleteClick={(commentID) => onDeleteClick(commentID)} key={replyData._id} />
+                    <ReplyWrapper
+                        replyData={replyData}
+                        onDeleteClick={(commentID) => onDeleteClick(commentID)}
+                        key={replyData._id}
+                    />
                 )}
             </div>
         </div>
@@ -58,11 +62,14 @@ const ReplyWrapper = ({ replyData, onDeleteClick }) => {
                 onReplyClick={() => setReplyMode(!replyMode)}
                 onDeleteClick={(commentID) => onDeleteClick(commentID)}
             />
-            {replyMode && <CreateReply
-                replyingTo={{ "id": replyData.id, "username": replyData.user.username }}
-                onReplyClick={() => { }}
-                hideMe={() => { }}
-            />}
+            {
+                replyMode &&
+                <CreateReply
+                    replyingTo={{ "id": replyData.id, "username": replyData.user.username }}
+                    onReplyClick={() => { }}
+                    hideMe={() => { }}
+                />
+            }
         </div>
     );
 

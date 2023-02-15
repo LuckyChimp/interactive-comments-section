@@ -87,8 +87,9 @@ function App() {
 				</div>
 			</footer>
 
-			{deleteModalVisible && (
-				<DeleteModal
+			{
+				deleteModalVisible &&
+				(<DeleteModal
 					onCancelClick={hideDeleteModal}
 					onDeleteClick={() => {
 						deleteComment(deleteCommentID).then(({ id }) => {
@@ -98,8 +99,8 @@ function App() {
 							});
 						});
 					}}
-				/>
-			)}
+				/>)
+			}
 		</CommentsDataContext.Provider>
 	);
 }

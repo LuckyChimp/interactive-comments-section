@@ -30,8 +30,14 @@ const LazyAvatar = ({ userID, width, height, ...props }) => {
 
     return (
         <div>
-            {avatarIsLoading && <LoadingSpinner width={width} height={height} />}
-            <img src={avatar} {...props} style={{ display: avatarIsLoading ? 'none' : 'initial', width: width }} />
+            {
+                avatarIsLoading &&
+                <LoadingSpinner width={width} height={height} />
+            }
+            <img
+                src={avatar} {...props}
+                style={{ display: avatarIsLoading ? 'none' : 'initial', width: width }}
+            />
         </div>
     );
 }
@@ -39,7 +45,10 @@ const LazyAvatar = ({ userID, width, height, ...props }) => {
 const LoadingSpinner = ({ width, height }) => {
     return (
         <div className="loading-spinner-container">
-            <div className="loading-spinner" style={{ width: width, height: height }}></div>
+            <div
+                className="loading-spinner"
+                style={{ width: width, height: height }}>
+            </div>
         </div>
     );
 }

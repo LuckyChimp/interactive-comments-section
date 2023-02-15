@@ -22,9 +22,16 @@ const Comments = ({ onDeleteClick }) => {
 
     return (
         <div className="comments">
-            {commentsData && commentsData.sort(sort).map(commentData => (
-                <CommentWrapper commentData={commentData} onDeleteClick={(commentID) => onDeleteClick(commentID)} key={commentData._id} />
-            ))}
+            {
+                commentsData &&
+                commentsData.sort(sort).map(commentData => (
+                    <CommentWrapper
+                        commentData={commentData}
+                        onDeleteClick={(commentID) => onDeleteClick(commentID)}
+                        key={commentData._id}
+                    />
+                ))
+            }
         </div>
     );
 };
@@ -38,10 +45,24 @@ const CommentWrapper = ({ commentData, onDeleteClick }) => {
 
     return (
         <div className="comment-wrapper">
-            {!isReply(commentData) && <Comment commentData={commentData} onReplyClick={() => setReplyMode(!replyMode)} onDeleteClick={(commentID) => onDeleteClick(commentID)} />}
-            {replyMode && <CreateReply />}
-            {commentData.replies.length > 0 &&
-                <CommentReplies replyIDs={commentData.replies} onDeleteClick={(commentID) => onDeleteClick(commentID)} />
+            {
+                !isReply(commentData) &&
+                <Comment
+                    commentData={commentData}
+                    onReplyClick={() => setReplyMode(!replyMode)}
+                    onDeleteClick={(commentID) => onDeleteClick(commentID)}
+                />
+            }
+            {
+                replyMode &&
+                <CreateReply />
+            }
+            {
+                commentData.replies.length > 0 &&
+                <CommentReplies
+                    replyIDs={commentData.replies}
+                    onDeleteClick={(commentID) => onDeleteClick(commentID)}
+                />
             }
         </div>
     );

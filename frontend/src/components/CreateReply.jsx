@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import LazyAvatar from "./LazyAvatar";
 
-const CreateReply = ({ }) => {
+const CreateReply = () => {
     const currentUser = null;
     const replyingTo = 'placeholder';
 
@@ -10,7 +10,13 @@ const CreateReply = ({ }) => {
 
     return (
         <div className="comment-reply-section">
-            <LazyAvatar userID={process.env.REACT_APP_CURRENT_USER_ID} width="2.5rem" height="2.5rem" className="comment-author-profile-photo" alt="author" />
+            <LazyAvatar
+                userID={process.env.REACT_APP_CURRENT_USER_ID}
+                width="2.5rem"
+                height="2.5rem"
+                className="comment-author-profile-photo"
+                alt="author"
+            />
             <textarea
                 onInput={e => setText(e.target.value)}
                 value={text}
