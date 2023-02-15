@@ -7,6 +7,7 @@ const CommentEditSection = ({ text, onTextareaChange, onUpdateClick }) => {
                 onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
                 className="comment-input"
                 rows="3"
+                spellCheck={false}
                 autoFocus
             />
             <button

@@ -17,6 +17,7 @@ const CreateReply = ({ }) => {
                 className="comment-input"
                 placeholder="Add a reply..."
                 rows="3"
+                spellCheck={false}
                 autoFocus />
             <button
                 onClick={() => {

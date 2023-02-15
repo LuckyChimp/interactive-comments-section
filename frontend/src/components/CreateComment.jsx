@@ -18,6 +18,7 @@ const CreateComment = () => {
                 className="comment-input"
                 placeholder="Add a comment..."
                 rows="3"
+                spellCheck={false}
                 autoFocus />
             <button
                 onClick={() => {
