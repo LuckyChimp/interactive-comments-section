@@ -3,9 +3,7 @@ const CommentText = ({ text, replyingTo }) => {
         <p className="comment-text">
             {
                 replyingTo &&
-                <span className="comment-text-recipient">
-                    @{replyingTo}
-                </span>
+                <span className="comment-text-recipient">@{replyingTo} </span>
             }
             {text}
         </p>

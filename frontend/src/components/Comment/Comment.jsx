@@ -14,8 +14,9 @@ const Comment = ({ commentData, onReplyClick, onDeleteClick }) => {
     const [text, setText] = useState(commentData.content);
 
 
-    const onUpdateClick = () => {
-        updateCommentText(commentData._id, text).then(commentData => {
+    const onUpdateClick = (newText) => {
+        updateCommentText(commentData._id, newText).then(commentData => {
+            setText(newText);
             setEditMode(false);
         });
     }
@@ -48,8 +49,7 @@ const Comment = ({ commentData, onReplyClick, onDeleteClick }) => {
                     (own && editMode) &&
                     <CommentEditSection
                         text={text}
-                        onTextareaChange={text => setText(text)}
-                        onUpdateClick={() => onUpdateClick()}
+                        onUpdateClick={(newText) => onUpdateClick(newText)}
                     />
                 }
             </div>
