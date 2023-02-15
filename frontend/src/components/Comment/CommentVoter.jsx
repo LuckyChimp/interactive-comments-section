@@ -4,14 +4,21 @@ import { ReactComponent as PlusIcon } from "../../assets/images/icon-plus.svg";
 import { ReactComponent as MinusIcon } from "../../assets/images/icon-minus.svg";
 
 const CommentVoter = ({ score, own }) => {
-    const [voted, setVoted] = useState(false);
+    const VotingStates = { // enum-like object
+        NotVoted: 'NotVoted',
+        Up: 'Up',
+        Down: 'Down'
+    };
+
+
+    const [votingState, setVotingState] = useState(VotingStates.NotVoted);
 
 
     const onUpvoteClick = () => {
-        if (!voted) {
-            setVoted('up');
-        } else if (voted === 'down') {
-            setVoted(false);
+        if (votingState === VotingStates.NotVoted) {
+            setVotingState(VotingStates.Up);
+        } else if (votingState === VotingStates.Down) {
+            setVotingState(VotingStates.NotVoted);
         } else {
             return () => { };
         }
@@ -19,10 +26,10 @@ const CommentVoter = ({ score, own }) => {
     };
 
     const onDownvoteClick = () => {
-        if (!voted) {
-            setVoted('down');
-        } else if (voted === 'up') {
-            setVoted(false);
+        if (votingState === VotingStates.NotVoted) {
+            setVotingState(VotingStates.Down);
+        } else if (votingState === VotingStates.Up) {
+            setVotingState(VotingStates.NotVoted);
         } else {
             return () => { };
         }
