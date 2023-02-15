@@ -1,10 +1,10 @@
 import { useState } from "react";
 
+import { updateCommentText } from "../../api";
 import CommentVoter from "./CommentVoter";
 import CommentHeader from "./CommentHeader";
 import CommentText from "./CommentText";
 import CommentEditSection from "./CommentEditSection";
-import { updateCommentText } from "../../api";
 
 const Comment = ({ commentData, onReplyClick, onDeleteClick }) => {
     const own = commentData.user === process.env.REACT_APP_CURRENT_USER_ID; // check if comment is from current user and set 'own' accordingly
@@ -15,8 +15,9 @@ const Comment = ({ commentData, onReplyClick, onDeleteClick }) => {
 
 
     const onUpdateClick = () => {
-        setEditMode(false);
-        updateCommentText(commentData._id, text);
+        updateCommentText(commentData._id, text).then(commentData => {
+            setEditMode(false);
+        });
     }
 
 

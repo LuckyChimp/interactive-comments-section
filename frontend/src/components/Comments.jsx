@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
+import { CommentsDataContext } from "../App";
 import Comment from "./Comment/Comment";
 import CreateReply from "./CreateReply";
 import CommentReplies from "./CommentReplies";
 
-const Comments = ({ commentsData, onDeleteClick }) => {
+
+const Comments = ({ onDeleteClick }) => {
+    const { commentsData } = useContext(CommentsDataContext);
+
     const sort = (a, b) => {
         if (a.score > b.score) {
             return -1;

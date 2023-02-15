@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
 
 import { fetchComments, deleteComment } from "./api";
-
 import Comments from './components/Comments';
 import CreateComment from './components/CreateComment';
 import DeleteModal from './components/DeleteModal';
-
 import './App.scss';
+
+export const CommentsDataContext = createContext();
+
 
 function App() {
 	const [commentsData, setCommentsData] = useState([]);
@@ -63,10 +64,9 @@ function App() {
 	}
 
 	return (
-		<>
+		<CommentsDataContext.Provider value={{ commentsData, setCommentsData }}>
 			<main>
 				<Comments
-					commentsData={commentsData}
 					onDeleteClick={(commentID) => {
 						setDeleteCommentID(commentID);
 						showDeleteModal();
@@ -100,7 +100,7 @@ function App() {
 					}}
 				/>
 			)}
-		</>
+		</CommentsDataContext.Provider>
 	);
 }
 

@@ -57,6 +57,35 @@ const fetchReplies = async (replyIDs) => {
 	return replies;
 };
 
+const createComment = async (text, userID, score, replies) => {
+	try {
+		const bodyData = {
+			content: text,
+			user: userID,
+			score: score ? score : 0,
+			replies: replies ? replies : []
+		};
+		const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments`, {
+			method: 'POST',
+			headers: {
+				'Content-type': 'application/json'
+			},
+			body: JSON.stringify(bodyData)
+		});
+		if (!res.ok) {
+			const err = await res.json();
+			console.error(err.stack);
+			return;
+		}
+
+		const createdComment = await res.json();
+
+		return createdComment;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 const updateCommentText = async (commentID, text) => {
 	try {
 		const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments/${commentID}`, {
@@ -72,9 +101,9 @@ const updateCommentText = async (commentID, text) => {
 			return;
 		}
 
-		const data = await res.json();
+		const updatedComment = await res.json();
 
-		return data;
+		return updatedComment;
 	} catch (error) {
 		console.error(error);
 	}
@@ -91,12 +120,12 @@ const deleteComment = async (commentID) => {
 			return;
 		}
 
-		const data = await res.json();
+		const deletedCommentID = await res.json();
 
-		return data;
+		return deletedCommentID;
 	} catch (error) {
 		console.error(error);
 	}
 };
 
-export { fetchUser, fetchComments, fetchReplies, updateCommentText, deleteComment };
+export { fetchUser, fetchComments, fetchReplies, createComment, updateCommentText, deleteComment };

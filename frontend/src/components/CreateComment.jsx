@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+
+import { CommentsDataContext } from "../App";
+import { createComment } from "../api";
 import LazyAvatar from './LazyAvatar';
 
-const CreateComment = ({ }) => {
+const CreateComment = () => {
+    const { commentsData, setCommentsData } = useContext(CommentsDataContext);
+
     const [text, setText] = useState('');
 
     return (
@@ -16,8 +21,10 @@ const CreateComment = ({ }) => {
                 autoFocus />
             <button
                 onClick={() => {
-                    // onCommentSendClick(text);
-                    setText('');
+                    createComment(text, process.env.REACT_APP_CURRENT_USER_ID).then(createdCommentData => {
+                        setCommentsData([createdCommentData, ...commentsData]);
+                        setText('');
+                    });
                 }}
                 className="comment-action-button">
                 Send
