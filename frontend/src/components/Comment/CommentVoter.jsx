@@ -6,36 +6,42 @@ import { ReactComponent as MinusIcon } from "../../assets/images/icon-minus.svg"
 const CommentVoter = ({ score, own }) => {
     const [voted, setVoted] = useState(false);
 
+
+    const onUpvoteClick = () => {
+        if (!voted) {
+            setVoted('up');
+        } else if (voted === 'down') {
+            setVoted(false);
+        } else {
+            return () => { };
+        }
+        // return onVoteClick(comment.id, +1);
+    };
+
+    const onDownvoteClick = () => {
+        if (!voted) {
+            setVoted('down');
+        } else if (voted === 'up') {
+            setVoted(false);
+        } else {
+            return () => { };
+        }
+        // return onVoteClick(comment.id, -1);
+    };
+
+
     return (
         <div className="comment-voter">
             <button
                 disabled={own}
-                onClick={() => {
-                    if (!voted) {
-                        setVoted('up');
-                    } else if (voted === 'down') {
-                        setVoted(false);
-                    } else {
-                        return () => { };
-                    }
-                    // return onVoteClick(comment.id, +1);
-                }}
+                onClick={() => onUpvoteClick()}
                 className="comment-voter-upvote">
                 <PlusIcon className="comment-voter-upvote-icon" />
             </button>
             <span className="comment-voter-score">{score}</span>
             <button
                 disabled={own}
-                onClick={() => {
-                    if (!voted) {
-                        setVoted('down');
-                    } else if (voted === 'up') {
-                        setVoted(false);
-                    } else {
-                        return () => { };
-                    }
-                    // return onVoteClick(comment.id, -1);
-                }}
+                onClick={() => onDownvoteClick()}
                 className="comment-voter-downvote">
                 <MinusIcon className="comment-voter-downvote-icon" />
             </button>

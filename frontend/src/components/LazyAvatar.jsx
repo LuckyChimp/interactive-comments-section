@@ -5,6 +5,7 @@ const LazyAvatar = ({ userID, width, height, ...props }) => {
     const [avatar, setAvatar] = useState(null);
     const [avatarIsLoading, setAvatarIsLoading] = useState(false);
 
+
     useEffect(() => {
         let active = true; // implement active bool to prevent race conditions
 
@@ -28,6 +29,7 @@ const LazyAvatar = ({ userID, width, height, ...props }) => {
         };
     }, [userID]);
 
+
     return (
         <div>
             {
@@ -36,7 +38,10 @@ const LazyAvatar = ({ userID, width, height, ...props }) => {
             }
             <img
                 src={avatar} {...props}
-                style={{ display: avatarIsLoading ? 'none' : 'initial', width: width }}
+                style={{
+                    display: avatarIsLoading ? 'none' : 'initial',
+                    width: width
+                }}
             />
         </div>
     );
@@ -47,7 +52,10 @@ const LoadingSpinner = ({ width, height }) => {
         <div className="loading-spinner-container">
             <div
                 className="loading-spinner"
-                style={{ width: width, height: height }}>
+                style={{
+                    width: width,
+                    height: height
+                }}>
             </div>
         </div>
     );

@@ -8,6 +8,7 @@ const CreateReply = () => {
 
     const [text, setText] = useState('');
 
+
     return (
         <div className="comment-reply-section">
             <LazyAvatar

@@ -29,6 +29,21 @@ const CommentHeader = ({ userID, commentID, createdAt, own, onReplyClick, onDele
 const HeaderInfo = ({ userID, createdAt, own }) => {
     const [username, setUsername] = useState(null);
 
+    useEffect(() => {
+        let active = true;
+
+        fetchUser(userID).then(user => {
+            if (active) {
+                setUsername(user.username);
+            }
+        });
+
+        return () => {
+            active = false;
+        }
+    }, [userID]);
+    
+
     const timeSince = (date) => {
         const now = Date.now();
         const diffInMs = Math.abs(now - date);
@@ -59,19 +74,6 @@ const HeaderInfo = ({ userID, createdAt, own }) => {
         }
     }
 
-    useEffect(() => {
-        let active = true;
-
-        fetchUser(userID).then(user => {
-            if (active) {
-                setUsername(user.username);
-            }
-        });
-
-        return () => {
-            active = false;
-        }
-    }, [userID]);
 
     return (
         <div className="comment-main-header-info">

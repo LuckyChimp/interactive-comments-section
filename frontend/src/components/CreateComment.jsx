@@ -9,6 +9,15 @@ const CreateComment = () => {
 
     const [text, setText] = useState('');
 
+
+    const onSendClick = () => {
+        createComment(text, process.env.REACT_APP_CURRENT_USER_ID).then(createdCommentData => {
+            setCommentsData([createdCommentData, ...commentsData]);
+            setText('');
+        });
+    };
+
+
     return (
         <div className="comment-create">
             <LazyAvatar
@@ -27,12 +36,7 @@ const CreateComment = () => {
                 spellCheck={false}
                 autoFocus />
             <button
-                onClick={() => {
-                    createComment(text, process.env.REACT_APP_CURRENT_USER_ID).then(createdCommentData => {
-                        setCommentsData([createdCommentData, ...commentsData]);
-                        setText('');
-                    });
-                }}
+                onClick={() => onSendClick()}
                 className="comment-action-button">
                 Send
             </button>

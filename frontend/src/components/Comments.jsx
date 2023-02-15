@@ -9,6 +9,7 @@ import CommentReplies from "./CommentReplies";
 const Comments = ({ onDeleteClick }) => {
     const { commentsData } = useContext(CommentsDataContext);
 
+
     const sort = (a, b) => {
         if (a.score > b.score) {
             return -1;
@@ -39,9 +40,11 @@ const Comments = ({ onDeleteClick }) => {
 const CommentWrapper = ({ commentData, onDeleteClick }) => {
     const [replyMode, setReplyMode] = useState(false);
 
+
     const isReply = (commentData) => {
         return commentData.replyingTo ? true : false;
     };
+
 
     return (
         <div className="comment-wrapper">
