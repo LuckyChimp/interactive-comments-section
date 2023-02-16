@@ -38,14 +38,25 @@ Users are able to:
 
 ### Built with
 
-- Semantic HTML5 markup
-- SCSS for clean, easy and less CSS
-- Flexbox
-- Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
+<ul>
+  <li>MERN stack</li>
+  <li>
+    <ul>
+      <li>[**M**ongoDB](https://www.mongodb.com/) - modern, fast and lightweight database</li>
+      <li>[**E**xpress.js](https://expressjs.com/) - Node.js web framework</li>
+      <li>[**R**eact](https://reactjs.org/) - client-side JavaScript framework</li>
+      <li>[**N**ode.js](https://nodejs.org/) - premier JavaScript web server</li>
+    </ul>
+  </li>
+  <li>SCSS for clean, easy and less CSS</li>
+  <li>Flexbox</li>
+  <li>Mobile-first workflow</li>
+</ul>
 
 ### Useful resource
 
+- [Using CORS in Express](https://medium.com/zero-equals-false/using-cors-in-express-cac7e29b005b) - short, helpful and easy-to-follow article on how to add cors supoort in express
+- [React re-renders guide](https://www.developerway.com/posts/react-re-renders-guide) - comprehensive guide on React re-renders, this guide explains what re-renders are, what necessary and unnecessary re-render is and what can trigger a React component re-render
 - [React Docs](https://beta.reactjs.org/) - Docs of React
 
 ## Author
