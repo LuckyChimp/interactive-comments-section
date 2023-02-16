@@ -10,11 +10,22 @@ const CreateComment = () => {
     const [text, setText] = useState('');
 
 
-    const onSendClick = () => {
+    const handleCreateComment = () => {
         createComment(text, process.env.REACT_APP_CURRENT_USER_ID).then(createdCommentData => {
-            setCommentsData([createdCommentData, ...commentsData]);
-            setText('');
+            setCommentsData([...commentsData, createdCommentData]);
         });
+
+        setText(''); // empty the textarea field for next comment creation
+    };
+
+    const onKeyDown = (event) => {
+        if (event.ctrlKey && event.key === 'Enter') {
+            handleCreateComment();
+        }
+    };
+
+    const onSendClick = () => {
+        handleCreateComment();
     };
 
 
@@ -28,8 +39,9 @@ const CreateComment = () => {
                 alt="author"
             />
             <textarea
-                onInput={e => setText(e.target.value)}
                 value={text}
+                onInput={event => setText(event.target.value)}
+                onKeyDown={event => onKeyDown(event)}
                 className="comment-input"
                 placeholder="Add a comment..."
                 rows="3"

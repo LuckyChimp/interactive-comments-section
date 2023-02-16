@@ -1,6 +1,6 @@
 # Frontend Mentor - Interactive comments section solution
 
-This is a solution to the [Interactive comments section challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/interactive-comments-section-iG1RugEG9). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
+This is a solution to the [Interactive comments section challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/interactive-comments-section-iG1RugEG9). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
 ## Table of contents
 
@@ -43,13 +43,10 @@ Users are able to:
 - Flexbox
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
-- REST API that holds all the necessary data, created with JSON Server (see below), hosted on [Vercel](https://vercel.com/)
-- Day.js library to calculate the elapsed time since a comment was created in seconds, minutes, hours, days, months or years until now
 
 ### Useful resource
 
-- [JSON Server](https://github.com/typicode/json-server) - Full, quick and easy REST API
-- [Day.js](https://github.com/iamkun/dayjs/) - minimalist JavaScript library that parses, validates, manipulates, and displays dates and times for modern browsers
+- [React Docs](https://beta.reactjs.org/) - Docs of React
 
 ## Author
 

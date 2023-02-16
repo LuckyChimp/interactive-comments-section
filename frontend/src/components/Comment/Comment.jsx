@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
-import { updateCommentText } from "../../api";
+import { CommentsDataContext } from "../../App";
+import { updateText } from "../../api";
 import CommentVoter from "./CommentVoter";
 import CommentHeader from "./CommentHeader";
 import CommentText from "./CommentText";
@@ -8,16 +9,18 @@ import CommentEditSection from "./CommentEditSection";
 
 const Comment = ({ commentData, onReplyClick, onDeleteClick }) => {
     const own = commentData.user === process.env.REACT_APP_CURRENT_USER_ID; // check if comment is from current user and set 'own' accordingly
-    const replyingTo = commentData.replyingTo;
+
+    const { commentsData, setCommentsData } = useContext(CommentsDataContext);
 
     const [editMode, setEditMode] = useState(false);
     const [text, setText] = useState(commentData.content);
 
 
-    const onUpdateClick = (newText) => {
-        updateCommentText(commentData._id, newText).then(commentData => {
-            setText(newText);
+    const onUpdateText = (newText) => {
+        updateText(commentData._id, newText).then(commentData => {
             setEditMode(false);
+            setText(newText);
+            setCommentsData(commentsData.map(cD => cD._id === commentData._id ? commentData : cD));
         });
     }
 
@@ -42,14 +45,14 @@ const Comment = ({ commentData, onReplyClick, onDeleteClick }) => {
                     !editMode &&
                     <CommentText
                         text={text}
-                        replyingTo={replyingTo}
+                        replyingTo={commentData.replyingTo}
                     />
                 }
                 {
                     (own && editMode) &&
                     <CommentEditSection
                         text={text}
-                        onUpdateClick={(newText) => onUpdateClick(newText)}
+                        onUpdateText={(newText) => onUpdateText(newText)}
                     />
                 }
             </div>

@@ -19,7 +19,7 @@ const CreateReply = () => {
                 alt="author"
             />
             <textarea
-                onInput={e => setText(e.target.value)}
+                onInput={event => setText(event.target.value)}
                 value={text}
                 className="comment-input"
                 placeholder="Add a reply..."

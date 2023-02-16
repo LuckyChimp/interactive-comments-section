@@ -86,7 +86,7 @@ const createComment = async (text, userID, score, replies) => {
 	}
 };
 
-const updateCommentText = async (commentID, text) => {
+const updateText = async (commentID, text) => {
 	try {
 		const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments/${commentID}`, {
 			method: 'PUT',
@@ -128,4 +128,4 @@ const deleteComment = async (commentID) => {
 	}
 };
 
-export { fetchUser, fetchComments, fetchReplies, createComment, updateCommentText, deleteComment };
+export { fetchUser, fetchComments, fetchReplies, createComment, updateText, deleteComment };

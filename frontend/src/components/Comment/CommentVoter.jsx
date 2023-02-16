@@ -22,7 +22,9 @@ const CommentVoter = ({ score, own }) => {
         } else {
             return () => { };
         }
+
         // return onVoteClick(comment.id, +1);
+        
     };
 
     const onDownvoteClick = () => {

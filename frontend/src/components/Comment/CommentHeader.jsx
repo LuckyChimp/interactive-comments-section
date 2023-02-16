@@ -7,6 +7,38 @@ import { ReactComponent as ReplyIcon } from "../../assets/images/icon-reply.svg"
 import { ReactComponent as DeleteIcon } from "../../assets/images/icon-delete.svg";
 import { ReactComponent as EditIcon } from "../../assets/images/icon-edit.svg";
 
+
+const timeSince = (date) => {
+    const now = Date.now();
+    const diffInMs = Math.abs(now - date);
+    const diff = {
+        "seconds": Math.floor(diffInMs / 1000),
+        "minutes": Math.floor(diffInMs / 1000 / 60),
+        "hours": Math.floor(diffInMs / 1000 / 60 / 60),
+        "days": Math.floor(diffInMs / 1000 / 60 / 60 / 24),
+        "weeks": Math.floor(diffInMs / 1000 / 60 / 60 / 24 / 7),
+        "months": Math.floor(diffInMs / 1000 / 60 / 60 / 24 / (365 / 12)),
+        "years": Math.floor(diffInMs / 1000 / 60 / 60 / 24 / 365)
+    }
+
+    if (diff.years >= 1) {
+        return `${diff.years} year${diff.years > 1 ? 's' : ''} ago`;
+    } else if (diff.months >= 1) {
+        return `${diff.months} month${diff.months > 1 ? 's' : ''} ago`;
+    } else if (diff.weeks >= 1) {
+        return `${diff.weeks} week${diff.weeks > 1 ? 's' : ''} ago`;
+    } else if (diff.days >= 1) {
+        return `${diff.days} day${diff.days > 1 ? 's' : ''} ago`;
+    } else if (diff.hours >= 1) {
+        return `${diff.hours} hour${diff.hours > 1 ? 's' : ''} ago`;
+    } else if (diff.minutes >= 1) {
+        return `${diff.minutes} minute${diff.minutes > 1 ? 's' : ''} ago`;
+    } else if (diff.seconds >= 0) {
+        return 'a few seconds ago';
+    }
+}
+
+
 const CommentHeader = ({ userID, commentID, createdAt, own, onReplyClick, onDeleteClick, onEditClick }) => {
     return (
         <div className="comment-main-header">
@@ -28,8 +60,14 @@ const CommentHeader = ({ userID, commentID, createdAt, own, onReplyClick, onDele
 
 const HeaderInfo = ({ userID, createdAt, own }) => {
     const [username, setUsername] = useState(null);
+    const [createdAtString, setCreatedAtString] = useState('');
 
     useEffect(() => {
+
+        const createdAtDate = new Date(createdAt);
+        setCreatedAtString(timeSince(createdAtDate));
+
+        // fetch and set username for displaying in comment header
         let active = true;
 
         fetchUser(userID).then(user => {
@@ -41,38 +79,7 @@ const HeaderInfo = ({ userID, createdAt, own }) => {
         return () => {
             active = false;
         }
-    }, [userID]);
-    
-
-    const timeSince = (date) => {
-        const now = Date.now();
-        const diffInMs = Math.abs(now - date);
-        const diff = {
-            "seconds": Math.floor(diffInMs / 1000),
-            "minutes": Math.floor(diffInMs / 1000 / 60),
-            "hours": Math.floor(diffInMs / 1000 / 60 / 60),
-            "days": Math.floor(diffInMs / 1000 / 60 / 60 / 24),
-            "weeks": Math.floor(diffInMs / 1000 / 60 / 60 / 24 / 7),
-            "months": Math.floor(diffInMs / 1000 / 60 / 60 / 24 / (365 / 12)),
-            "years": Math.floor(diffInMs / 1000 / 60 / 60 / 24 / 365)
-        }
-
-        if (diff.years >= 1) {
-            return `${diff.years} year${diff.years > 1 ? 's' : ''} ago`;
-        } else if (diff.months >= 1) {
-            return `${diff.months} month${diff.months > 1 ? 's' : ''} ago`;
-        } else if (diff.weeks >= 1) {
-            return `${diff.weeks} week${diff.weeks > 1 ? 's' : ''} ago`;
-        } else if (diff.days >= 1) {
-            return `${diff.days} day${diff.days > 1 ? 's' : ''} ago`;
-        } else if (diff.hours >= 1) {
-            return `${diff.hours} hour${diff.hours > 1 ? 's' : ''} ago`;
-        } else if (diff.minutes >= 1) {
-            return `${diff.minutes} minute${diff.minutes > 1 ? 's' : ''} ago`;
-        } else if (diff.seconds >= 1) {
-            return `${diff.seconds} second${diff.seconds > 1 ? 's' : ''} ago`;
-        }
-    }
+    }, [createdAt, userID]);
 
 
     return (
@@ -89,7 +96,7 @@ const HeaderInfo = ({ userID, createdAt, own }) => {
                 ? <span className="comment-owner-tag">you</span>
                 : ''
             }
-            <span className="comment-created">{timeSince(new Date(createdAt))}</span>
+            <span className="comment-created">{createdAtString}</span>
         </div>
     );
 };
