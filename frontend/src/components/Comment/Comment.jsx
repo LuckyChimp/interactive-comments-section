@@ -29,7 +29,7 @@ const Comment = ({ commentData, onReplyClick, onDeleteClick }) => {
         <div className="comment">
             <CommentVoter
                 commentID={commentData._id}
-                score={commentData.score}
+                initialScore={commentData.score}
                 own={own}
             />
             <div className="comment-main">

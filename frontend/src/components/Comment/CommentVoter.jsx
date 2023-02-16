@@ -1,11 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 
 import { CommentsDataContext } from "../../App";
 import { updateScore } from "../../api";
 import { ReactComponent as PlusIcon } from "../../assets/images/icon-plus.svg";
 import { ReactComponent as MinusIcon } from "../../assets/images/icon-minus.svg";
 
-const CommentVoter = ({ commentID, score, own }) => {
+const CommentVoter = ({ commentID, initialScore, own }) => {
     const VotingStates = { // enum-like object
         NotVoted: 'NotVoted',
         Up: 'Up',
@@ -14,6 +14,7 @@ const CommentVoter = ({ commentID, score, own }) => {
 
     const { commentsData, setCommentsData } = useContext(CommentsDataContext);
 
+    const [score, setScore] = useState(initialScore);
     const [votingState, setVotingState] = useState(VotingStates.NotVoted);
 
 
@@ -26,7 +27,8 @@ const CommentVoter = ({ commentID, score, own }) => {
             return () => { };
         }
 
-        updateScore(commentID, score + 1).then(commentData => {
+        updateScore(commentID, (score + 1)).then(commentData => {
+            setScore(score + 1);
             setCommentsData(commentsData.map(_commentData => _commentData._id === commentData._id ? commentData : _commentData));
         });
     };
@@ -40,7 +42,8 @@ const CommentVoter = ({ commentID, score, own }) => {
             return () => { };
         }
 
-        updateScore(commentID, score - 1).then(commentData => {
+        updateScore(commentID, (score - 1)).then(commentData => {
+            setScore(score - 1);
             setCommentsData(commentsData.map(_commentData => _commentData._id === commentData._id ? commentData : _commentData));
         });
     };
@@ -49,14 +52,14 @@ const CommentVoter = ({ commentID, score, own }) => {
     return (
         <div className="comment-voter">
             <button
-                disabled={own}
+                disabled={own || votingState === VotingStates.Up}
                 onClick={() => onUpvoteClick()}
                 className="comment-voter-upvote">
                 <PlusIcon className="comment-voter-upvote-icon" />
             </button>
             <span className="comment-voter-score">{score}</span>
             <button
-                disabled={own}
+                disabled={own || votingState === VotingStates.Down}
                 onClick={() => onDownvoteClick()}
                 className="comment-voter-downvote">
                 <MinusIcon className="comment-voter-downvote-icon" />
