@@ -1,6 +1,8 @@
+const API_URL = 'api';
+
 const fetchUser = async (userID) => {
 	try {
-		const res = await fetch(`${process.env.REACT_APP_DB_URL}/users/${userID}`);
+		const res = await fetch(`${API_URL}/users/${userID}`);
 		if (!res.ok) {
 			const err = await res.json();
 			console.error(err.stack);
@@ -17,7 +19,7 @@ const fetchUser = async (userID) => {
 
 const fetchComments = async () => {
 	try {
-		const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments`);
+		const res = await fetch(`${API_URL}/comments`);
 		const comments = await res.json();
 
 		return comments;
@@ -28,7 +30,7 @@ const fetchComments = async () => {
 
 const fetchComment = async (commentID) => {
 	try {
-		const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments/${commentID}`);
+		const res = await fetch(`${API_URL}/comments/${commentID}`);
 		if (!res.ok) {
 			const err = await res.json();
 			console.error(err.stack);
@@ -65,7 +67,7 @@ const createComment = async (text, userID, score, replies) => {
 			score: score ? score : 0,
 			replies: replies ? replies : []
 		};
-		const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments`, {
+		const res = await fetch(`${API_URL}/comments`, {
 			method: 'POST',
 			headers: {
 				'Content-type': 'application/json'
@@ -94,7 +96,7 @@ const createReply = async (text, userID, replyingTo, score) => {
 			replyingTo: replyingTo,
 			score: score ? score : 0
 		};
-		const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments`, {
+		const res = await fetch(`${API_URL}/comments`, {
 			method: 'POST',
 			headers: {
 				'Content-type': 'application/json'
@@ -117,7 +119,7 @@ const createReply = async (text, userID, replyingTo, score) => {
 
 const updateText = async (commentID, text) => {
 	try {
-		const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments/${commentID}`, {
+		const res = await fetch(`${API_URL}/comments/${commentID}`, {
 			method: 'PUT',
 			headers: {
 				'Content-type': 'application/json'
@@ -140,7 +142,7 @@ const updateText = async (commentID, text) => {
 
 const updateScore = async (commentID, score) => {
 	try {
-		const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments/${commentID}`, {
+		const res = await fetch(`${API_URL}/comments/${commentID}`, {
 			method: 'PUT',
 			headers: {
 				'Content-type': 'application/json'
@@ -163,7 +165,7 @@ const updateScore = async (commentID, score) => {
 
 const deleteComment = async (commentID) => {
 	try {
-		const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments/${commentID}`, {
+		const res = await fetch(`${API_URL}/comments/${commentID}`, {
 			method: 'DELETE'
 		});
 		if (!res.ok) {
