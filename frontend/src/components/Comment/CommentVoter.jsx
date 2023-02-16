@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 
 import { CommentsDataContext } from "../../App";
 import { updateScore } from "../../api";

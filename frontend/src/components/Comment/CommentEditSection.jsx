@@ -11,7 +11,7 @@ const CommentEditSection = ({ text, hideMe, onUpdateText }) => {
     const onKeyDown = (event) => {
         if (event.ctrlKey && event.key === 'Enter' && !event.repeat) {
             onUpdateText(newText);
-        } else if (event.key == 'Escape' && !event.repeat) {
+        } else if (event.key === 'Escape' && !event.repeat) {
             hideMe();
         }
     };
