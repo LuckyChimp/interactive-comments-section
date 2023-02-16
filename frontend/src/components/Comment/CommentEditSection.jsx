@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const CommentEditSection = ({ text, onUpdateText }) => {
+const CommentEditSection = ({ text, hideMe, onUpdateText }) => {
     const [newText, setNewText] = useState('');
 
     useEffect(() => {
@@ -9,8 +9,10 @@ const CommentEditSection = ({ text, onUpdateText }) => {
 
 
     const onKeyDown = (event) => {
-        if (event.ctrlKey && event.key === 'Enter') {
+        if (event.ctrlKey && event.key === 'Enter' && !event.repeat) {
             onUpdateText(newText);
+        } else if (event.key == 'Escape' && !event.repeat) {
+            hideMe();
         }
     };
 

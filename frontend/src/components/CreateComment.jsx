@@ -19,7 +19,7 @@ const CreateComment = () => {
     };
 
     const onKeyDown = (event) => {
-        if (event.ctrlKey && event.key === 'Enter') {
+        if (event.ctrlKey && event.key === 'Enter' && !event.repeat) {
             handleCreateComment();
         }
     };

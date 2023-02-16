@@ -53,6 +53,7 @@ const Comment = ({ commentData, onReplyClick, onDeleteClick }) => {
                     (own && editMode) &&
                     <CommentEditSection
                         text={text}
+                        hideMe={() => setEditMode(false)}
                         onUpdateText={(newText) => onUpdateText(newText)}
                     />
                 }
