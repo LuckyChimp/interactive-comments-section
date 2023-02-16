@@ -62,13 +62,13 @@ const HeaderInfo = ({ userID, createdAt, own }) => {
     const [username, setUsername] = useState(null);
     const [createdAtString, setCreatedAtString] = useState('');
 
-    useEffect(() => {
 
+    useEffect(() => {
         const createdAtDate = new Date(createdAt);
         setCreatedAtString(timeSince(createdAtDate));
 
         // fetch and set username for displaying in comment header
-        let active = true;
+        let active = true; // implement active bool to prevent race conditions
 
         fetchUser(userID).then(userData => {
             if (active) {

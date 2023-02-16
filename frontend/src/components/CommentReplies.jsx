@@ -9,7 +9,7 @@ const CommentReplies = ({ replyIDs, onDeleteClick }) => {
     const [repliesData, setRepliesData] = useState([]);
 
     useEffect(() => {
-        let active = true;
+        let active = true; // implement active bool to prevent race conditions
 
         fetchReplies(replyIDs).then(repliesData => {
             if (active) {

@@ -8,8 +8,7 @@ const CommentText = ({ text, replyingTo }) => {
 
 
     useEffect(() => {
-        // fetch and set username for displaying in comment header
-        let active = true;
+        let active = true; // implement active bool to prevent race conditions
 
         fetchComment(replyingTo).then(commentData => {
             fetchUser(commentData.user).then(userData => {

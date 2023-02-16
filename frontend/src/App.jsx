@@ -106,5 +106,3 @@ function App() {
 }
 
 export default App;
-
-// TODO implement boolean flag in all useEffect hooks to prevent race conditions
