@@ -58,7 +58,10 @@ const CommentWrapper = ({ commentData, onDeleteClick }) => {
             }
             {
                 replyMode &&
-                <CreateReply />
+                <CreateReply
+                    replyingTo={commentData._id}
+                    hideMe={() => setReplyMode(false)}
+                />
             }
             {
                 commentData.replies && commentData.replies.length > 0 &&

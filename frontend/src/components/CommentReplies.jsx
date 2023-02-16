@@ -67,9 +67,8 @@ const ReplyWrapper = ({ replyData, onDeleteClick }) => {
             {
                 replyMode &&
                 <CreateReply
-                    replyingTo={{ "id": replyData.id, "username": replyData.user.username }}
-                    onReplyClick={() => { }}
-                    hideMe={() => { }}
+                    replyingTo={replyData._id}
+                    hideMe={() => setReplyMode(false)}
                 />
             }
         </div>

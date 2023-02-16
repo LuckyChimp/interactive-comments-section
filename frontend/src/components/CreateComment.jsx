@@ -13,9 +13,8 @@ const CreateComment = () => {
     const handleCreateComment = () => {
         createComment(text, process.env.REACT_APP_CURRENT_USER_ID).then(createdCommentData => {
             setCommentsData([...commentsData, createdCommentData]);
+            setText(''); // empty the textarea field for next comment creation
         });
-
-        setText(''); // empty the textarea field for next comment creation
     };
 
     const onKeyDown = (event) => {

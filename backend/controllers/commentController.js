@@ -30,6 +30,7 @@ const getComment = asyncHandler(async (req, res) => {
 // @route   POST /api/comments
 // @access  Public
 const createComment = asyncHandler(async (req, res) => {
+	// create comment itself
 	try {
 		await Comment.validate(req.body);
 	} catch (error) {
@@ -38,6 +39,23 @@ const createComment = asyncHandler(async (req, res) => {
 	}
 
 	const comment = await Comment.create(req.body);
+
+	// if comment has the 'replyingTo' field add the comments id to the 'replies' field of the parent comment
+	if (comment.replyingTo) {
+		const refComment = await Comment.findById(comment.replyingTo);
+		if (!refComment) {
+			res.status(400);
+			throw new Error('Comment to which you want to reply was not found');
+		}
+
+		if (refComment.replyingTo) {
+			// if the referenced comment of the reply is a reply itself (hasn't the 'replies' field) search for the id of the referenced comment in 'replies' field of all existing comments and add the comment id to the 'replies' field of the resulting parent comment
+			await Comment.updateMany({ replies: { $in: [comment.replyingTo] } }, { $push: { replies: comment._id } });
+		} else {
+			// if the referenced comment of the reply is a parent component (hasn't the 'replyingTo' field) add comments id to it
+			await Comment.findByIdAndUpdate(comment.replyingTo, { $push: { replies: comment._id } });
+		}
+	}
 
 	res.status(200).json(comment);
 });

@@ -107,9 +107,9 @@ const createReply = async (text, userID, replyingTo, score) => {
 			return;
 		}
 
-		const createdComment = await res.json();
+		const createdReply = await res.json();
 
-		return createdComment;
+		return createdReply;
 	} catch (error) {
 		console.log(error);
 	}

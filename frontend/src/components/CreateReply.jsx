@@ -1,12 +1,29 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
+import { CommentsDataContext } from "../App";
+import { createReply, fetchComments } from "../api";
 import LazyAvatar from "./LazyAvatar";
 
-const CreateReply = () => {
-    const currentUser = null;
-    const replyingTo = 'placeholder';
+const CreateReply = ({ replyingTo, hideMe }) => {
+    const { setCommentsData } = useContext(CommentsDataContext);
 
     const [text, setText] = useState('');
+
+
+    const handleCreateReply = () => {
+        createReply(text, process.env.REACT_APP_CURRENT_USER_ID, replyingTo).then(createdReplyData => {
+            fetchComments().then(commentsData => {
+                hideMe();
+                setCommentsData(commentsData);
+            });
+        });
+    }
+
+    const onKeyDown = (event) => {
+        if (event.ctrlKey && event.key === 'Enter' && !event.repeat) {
+            handleCreateReply();
+        }
+    };
 
 
     return (
@@ -20,6 +37,7 @@ const CreateReply = () => {
             />
             <textarea
                 onInput={event => setText(event.target.value)}
+                onKeyDown={(event) => onKeyDown(event)}
                 value={text}
                 className="comment-input"
                 placeholder="Add a reply..."
@@ -27,10 +45,7 @@ const CreateReply = () => {
                 spellCheck={false}
                 autoFocus />
             <button
-                onClick={() => {
-                    // hideMe();
-                    // return onReplyClick(replyingTo, text);
-                }}
+                onClick={() => handleCreateReply()}
                 className="comment-reply comment-action-button">
                 Reply
             </button>
