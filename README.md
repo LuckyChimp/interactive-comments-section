@@ -38,20 +38,14 @@ Users are able to:
 
 ### Built with
 
-<ul>
-  <li>MERN stack</li>
-  <li>
-    <ul>
-      <li>[**M**ongoDB](https://www.mongodb.com/) - modern, fast and lightweight database</li>
-      <li>[**E**xpress.js](https://expressjs.com/) - Node.js web framework</li>
-      <li>[**R**eact](https://reactjs.org/) - client-side JavaScript framework</li>
-      <li>[**N**ode.js](https://nodejs.org/) - premier JavaScript web server</li>
-    </ul>
-  </li>
-  <li>SCSS for clean, easy and less CSS</li>
-  <li>Flexbox</li>
-  <li>Mobile-first workflow</li>
-</ul>
+- MERN stack
+  - [**M**ongoDB](https://www.mongodb.com/) - modern, fast and lightweight database
+  - [**E**xpress.js](https://expressjs.com/) - Node.js web framework
+  - [**R**eact](https://reactjs.org/) - client-side JavaScript framework
+  - [**N**ode.js](https://nodejs.org/) - premier JavaScript web server
+- SCSS for clean, easy and less CSS
+- Flexbox
+- Mobile-first workflow
 
 ### Useful resource
 
