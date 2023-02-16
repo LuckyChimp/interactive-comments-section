@@ -11,9 +11,9 @@ const CommentReplies = ({ replyIDs, onDeleteClick }) => {
     useEffect(() => {
         let active = true;
 
-        fetchReplies(replyIDs).then(replies => {
+        fetchReplies(replyIDs).then(repliesData => {
             if (active) {
-                setRepliesData(replies);
+                setRepliesData(repliesData);
             }
         });
 

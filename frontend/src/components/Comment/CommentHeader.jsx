@@ -70,9 +70,9 @@ const HeaderInfo = ({ userID, createdAt, own }) => {
         // fetch and set username for displaying in comment header
         let active = true;
 
-        fetchUser(userID).then(user => {
+        fetchUser(userID).then(userData => {
             if (active) {
-                setUsername(user.username);
+                setUsername(userData.username);
             }
         });
 
