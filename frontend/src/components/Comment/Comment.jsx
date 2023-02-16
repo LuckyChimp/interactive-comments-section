@@ -20,7 +20,7 @@ const Comment = ({ commentData, onReplyClick, onDeleteClick }) => {
         updateText(commentData._id, newText).then(commentData => {
             setEditMode(false);
             setText(newText);
-            setCommentsData(commentsData.map(cD => cD._id === commentData._id ? commentData : cD));
+            setCommentsData(commentsData.map(_commentData => _commentData._id === commentData._id ? commentData : _commentData));
         });
     }
 
@@ -28,6 +28,7 @@ const Comment = ({ commentData, onReplyClick, onDeleteClick }) => {
     return (
         <div className="comment">
             <CommentVoter
+                commentID={commentData._id}
                 score={commentData.score}
                 own={own}
             />

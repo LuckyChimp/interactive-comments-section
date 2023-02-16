@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
+import { CommentsDataContext } from "../../App";
+import { updateScore } from "../../api";
 import { ReactComponent as PlusIcon } from "../../assets/images/icon-plus.svg";
 import { ReactComponent as MinusIcon } from "../../assets/images/icon-minus.svg";
 
-const CommentVoter = ({ score, own }) => {
+const CommentVoter = ({ commentID, score, own }) => {
     const VotingStates = { // enum-like object
         NotVoted: 'NotVoted',
         Up: 'Up',
         Down: 'Down'
     };
 
+    const { commentsData, setCommentsData } = useContext(CommentsDataContext);
 
     const [votingState, setVotingState] = useState(VotingStates.NotVoted);
 
@@ -23,8 +26,9 @@ const CommentVoter = ({ score, own }) => {
             return () => { };
         }
 
-        // return onVoteClick(comment.id, +1);
-        
+        updateScore(commentID, score + 1).then(commentData => {
+            setCommentsData(commentsData.map(_commentData => _commentData._id === commentData._id ? commentData : _commentData));
+        });
     };
 
     const onDownvoteClick = () => {
@@ -35,7 +39,10 @@ const CommentVoter = ({ score, own }) => {
         } else {
             return () => { };
         }
-        // return onVoteClick(comment.id, -1);
+
+        updateScore(commentID, score - 1).then(commentData => {
+            setCommentsData(commentsData.map(_commentData => _commentData._id === commentData._id ? commentData : _commentData));
+        });
     };
 
 

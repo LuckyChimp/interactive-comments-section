@@ -109,6 +109,29 @@ const updateText = async (commentID, text) => {
 	}
 };
 
+const updateScore = async (commentID, score) => {
+	try {
+		const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments/${commentID}`, {
+			method: 'PUT',
+			headers: {
+				'Content-type': 'application/json'
+			},
+			body: JSON.stringify({ score: score })
+		});
+		if (!res.ok) {
+			const err = await res.json();
+			console.error(err.stack);
+			return;
+		}
+
+		const updatedComment = await res.json();
+
+		return updatedComment;
+	} catch (error) {
+		console.error(error);
+	}
+};
+
 const deleteComment = async (commentID) => {
 	try {
 		const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments/${commentID}`, {
@@ -128,4 +151,4 @@ const deleteComment = async (commentID) => {
 	}
 };
 
-export { fetchUser, fetchComments, fetchReplies, createComment, updateText, deleteComment };
+export { fetchUser, fetchComments, fetchReplies, createComment, updateText, updateScore, deleteComment };
