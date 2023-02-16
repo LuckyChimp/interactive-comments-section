@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { fetchUser } from "../../api";
+import { fetchComment, fetchUser } from "../../api";
 
 
 const CommentText = ({ text, replyingTo }) => {
@@ -11,10 +11,12 @@ const CommentText = ({ text, replyingTo }) => {
         // fetch and set username for displaying in comment header
         let active = true;
 
-        fetchUser(replyingTo).then(user => {
-            if (active) {
-                setRecipient(user.username);
-            }
+        fetchComment(replyingTo).then(commentData => {
+            fetchUser(commentData.user).then(userData => {
+                if (active) {
+                    setRecipient(userData.username);
+                }
+            });
         });
 
         return () => {

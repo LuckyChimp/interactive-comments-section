@@ -86,6 +86,35 @@ const createComment = async (text, userID, score, replies) => {
 	}
 };
 
+const createReply = async (text, userID, replyingTo, score) => {
+	try {
+		const bodyData = {
+			content: text,
+			user: userID,
+			replyingTo: replyingTo,
+			score: score ? score : 0
+		};
+		const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments`, {
+			method: 'POST',
+			headers: {
+				'Content-type': 'application/json'
+			},
+			body: JSON.stringify(bodyData)
+		});
+		if (!res.ok) {
+			const err = await res.json();
+			console.error(err.stack);
+			return;
+		}
+
+		const createdComment = await res.json();
+
+		return createdComment;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 const updateText = async (commentID, text) => {
 	try {
 		const res = await fetch(`${process.env.REACT_APP_DB_URL}/comments/${commentID}`, {
@@ -151,4 +180,14 @@ const deleteComment = async (commentID) => {
 	}
 };
 
-export { fetchUser, fetchComments, fetchReplies, createComment, updateText, updateScore, deleteComment };
+export {
+	fetchUser,
+	fetchComments,
+	fetchComment,
+	fetchReplies,
+	createComment,
+	createReply,
+	updateText,
+	updateScore,
+	deleteComment
+};

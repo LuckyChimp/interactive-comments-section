@@ -21,7 +21,7 @@ const commentSchema = mongoose.Schema(
 		},
 		replyingTo: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref: 'User'
+			ref: 'Comment'
 		}
 	},
 	{ timestamps: true }
