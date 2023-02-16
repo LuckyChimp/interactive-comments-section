@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchUser } from "../api";
 
-const LazyAvatar = ({ userID, width, height, ...props }) => {
+const LazyAvatar = ({ userID, width, height, alt, ...props }) => {
     const [avatar, setAvatar] = useState(null);
     const [avatarIsLoading, setAvatarIsLoading] = useState(false);
 
@@ -37,11 +37,13 @@ const LazyAvatar = ({ userID, width, height, ...props }) => {
                 <LoadingSpinner width={width} height={height} />
             }
             <img
-                src={avatar} {...props}
+                src={avatar}
                 style={{
                     display: avatarIsLoading ? 'none' : 'initial',
                     width: width
                 }}
+                alt={alt}
+                {...props}
             />
         </div>
     );
