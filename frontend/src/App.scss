@@ -31,9 +31,12 @@ $breakpoint_large: 1200px;
     color: $neut_grayishBlue;
 }
 
-button:not(:disabled) {
+button {
     font-size: 1rem;
-    cursor: pointer;
+
+    &:not(:disabled) {
+        cursor: pointer;
+    }
 }
 
 body {
