@@ -61,7 +61,7 @@ const CommentWrapper = ({ commentData, onDeleteClick }) => {
                 <CreateReply />
             }
             {
-                commentData.replies.length > 0 &&
+                commentData.replies && commentData.replies.length > 0 &&
                 <CommentReplies
                     replyIDs={commentData.replies}
                     onDeleteClick={(commentID) => onDeleteClick(commentID)}

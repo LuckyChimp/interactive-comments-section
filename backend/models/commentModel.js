@@ -17,7 +17,8 @@ const commentSchema = mongoose.Schema(
 		},
 		replies: {
 			type: [mongoose.Schema.Types.ObjectId],
-			ref: 'Comment'
+			ref: 'Comment',
+			default: undefined
 		},
 		replyingTo: {
 			type: mongoose.Schema.Types.ObjectId,
@@ -28,3 +29,5 @@ const commentSchema = mongoose.Schema(
 );
 
 module.exports = mongoose.model('Comment', commentSchema);
+
+// TODO sorge dafür, dass entweder das field 'replies' oder 'replyingTo' angegeben wird - auch nicht beide zusammen!
