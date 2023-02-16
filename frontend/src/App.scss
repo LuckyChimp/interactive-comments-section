@@ -31,9 +31,12 @@ $breakpoint_large: 1200px;
     color: $neut_grayishBlue;
 }
 
-button:not(:disabled) {
+button {
     font-size: 1rem;
-    cursor: pointer;
+
+    &:not(:disabled) {
+        cursor: pointer;
+    }
 }
 
 body {
@@ -45,17 +48,17 @@ body {
     }
 
     main {
-        
+
         @media screen and (max-width: $breakpoint_medium) {
             margin: 2.5% 0;
             padding: 0 2.5%;
         }
-        
+
         @media screen and (min-width: $breakpoint_medium) {
             margin: 2.5% 0;
             padding: 0 15%;
         }
-        
+
         @media screen and (min-width: $breakpoint_large) {
             margin: 4rem 0;
             padding: 0 25%;
@@ -68,7 +71,7 @@ body {
                 &:not(:last-of-type) {
                     margin-bottom: $space_btwComments;
                 }
-                
+
                 .comment {
                     display: flex;
                     flex-direction: row;
@@ -80,13 +83,13 @@ body {
                         position: relative;
                         padding-bottom: calc($space_inComment*2.75);
                     }
-        
+
                     .comment-voter {
                         display: flex;
                         flex-direction: column;
                         margin-right: $space_inComment;
-        
-                        & > * {
+
+                        &>* {
                             padding: 0.25rem 0.5rem;
                             background-color: $neut_veryLiGray;
                         }
@@ -97,41 +100,48 @@ body {
                             left: $space_inComment;
                             flex-direction: row;
                         }
-        
+
                         button {
                             border: none;
                             color: $prim_liGrayBlue;
                             font-weight: 500;
                             transition: $transition;
                             user-select: none;
-        
+
                             &:first-of-type {
                                 border-top-left-radius: $borderRadius;
-                                
+
                                 @media screen and (max-width: $breakpoint_small) {
                                     border-bottom-left-radius: $borderRadius;
                                 }
+
                                 @media screen and (min-width: $breakpoint_small) {
                                     border-top-right-radius: $borderRadius;
                                 }
                             }
-        
+
                             &:last-of-type {
                                 border-bottom-right-radius: $borderRadius;
 
                                 @media screen and (max-width: $breakpoint_small) {
                                     border-top-right-radius: $borderRadius;
                                 }
+
                                 @media screen and (min-width: $breakpoint_small) {
                                     border-bottom-left-radius: $borderRadius;
                                 }
                             }
-    
+
                             &:hover:not(:disabled) {
                                 color: $prim_modBlue;
                             }
+
+                            .comment-voter-downvote-icon,
+                            .comment-voter-upvote-icon {
+                                transform: scale(0.9);
+                            }
                         }
-        
+
                         .comment-voter-score {
                             min-width: 2.4em;
                             color: $prim_modBlue;
@@ -139,37 +149,33 @@ body {
                             text-align: center;
                         }
                     }
-        
+
                     .comment-main {
                         flex-grow: 1;
                         display: flex;
                         flex-direction: column;
-        
+
                         .comment-main-header {
                             display: flex;
                             flex-flow: row nowrap;
                             justify-content: space-between;
                             align-items: center;
                             margin-bottom: calc($space_inComment/2);
-        
+
                             .comment-main-header-info {
                                 display: flex;
                                 flex-flow: row nowrap;
                                 align-items: center;
-        
-                                & > *:not(:last-child) {
+
+                                &>*:not(:last-child) {
                                     margin-right: calc($space_inComment/2);
                                 }
-        
-                                .comment-author-profile-photo {
-                                    width: 2rem;
-                                }
-        
+
                                 .comment-author {
                                     color: $neut_darkBlue;
                                     font-weight: 500;
                                 }
-        
+
                                 .comment-owner-tag {
                                     padding: 0.1em 0.4em 0.2em 0.4em;
                                     border-radius: calc($borderRadius/4);
@@ -178,7 +184,7 @@ body {
                                     font-size: 0.75rem;
                                 }
                             }
-                            
+
                             .comment-main-header-actions {
                                 display: flex;
                                 flex-flow: row nowrap;
@@ -188,7 +194,7 @@ body {
                                     bottom: calc($space_inComment*1.25);
                                     right: $space_inComment;
                                 }
-        
+
                                 .comment-main-header-action {
                                     display: flex;
                                     flex-flow: row nowrap;
@@ -196,39 +202,40 @@ body {
                                     border: none;
                                     background-color: transparent;
                                     transition: $transition;
-        
+
                                     &:not(:last-child) {
                                         margin-right: $space_inComment;
                                     }
-    
+
                                     path {
                                         transition: $transition;
                                     }
-        
-                                    &.comment-main-header-reply, &.comment-main-header-edit {
+
+                                    &.comment-main-header-reply,
+                                    &.comment-main-header-edit {
                                         color: $prim_modBlue;
-    
+
                                         &:hover {
                                             color: $prim_liGrayBlue;
-    
+
                                             .comment-main-header-action-icon path {
                                                 fill: $prim_liGrayBlue;
                                             }
                                         }
                                     }
-        
+
                                     &.comment-main-header-delete {
                                         color: $prim_softRed;
-    
+
                                         &:hover {
                                             color: $prim_paleRed;
-    
+
                                             .comment-main-header-action-icon path {
                                                 fill: $prim_paleRed;
                                             }
                                         }
                                     }
-        
+
                                     .comment-main-header-action-icon {
                                         margin-right: calc($space_inComment/4);
                                         transition: $transition;
@@ -236,7 +243,7 @@ body {
                                 }
                             }
                         }
-    
+
                         .comment-text {
                             .comment-text-recipient {
                                 color: $prim_modBlue;
@@ -250,14 +257,14 @@ body {
                     display: flex;
                     flex-flow: row nowrap;
                     margin-top: $space_btwComments;
-            
+
                     .vertical-indentation-line {
                         flex-shrink: 0;
                         width: 2px;
                         margin: 0 2rem;
                         border-radius: 2px;
                         background-color: $neut_liGray;
-                        
+
                         @media screen and (max-width: $breakpoint_medium) {
                             margin: 0 1rem 0 0;
                         }
@@ -271,12 +278,14 @@ body {
         }
 
 
-        .comment-create, .comment-edit-section, .comment-reply-section {
+        .comment-create,
+        .comment-edit-section,
+        .comment-reply-section {
             border-radius: $borderRadius;
             background-color: $neut_white;
 
             .comment-author-profile-photo {
-                width: 2.5rem;
+                flex-shrink: 0;
             }
 
             .comment-input {
@@ -288,7 +297,7 @@ body {
                 resize: none;
                 transition: $transition;
                 font-size: 1rem;
-                
+
                 &:focus {
                     outline: 0;
                     border-color: $prim_liGrayBlue;
@@ -303,7 +312,7 @@ body {
                 font-size: 0.9rem;
                 color: $neut_white;
                 text-transform: uppercase;
-                transition: $transition;                
+                transition: $transition;
 
                 &:hover {
                     background-color: $prim_liGrayBlue;
@@ -311,7 +320,8 @@ body {
             }
         }
 
-        .comment-create, .comment-reply-section {
+        .comment-create,
+        .comment-reply-section {
             position: relative;
             display: flex;
             flex-direction: row;
@@ -327,23 +337,24 @@ body {
                     order: 1;
                 }
 
-                .comment-author-profile-photo, .comment-action-button {
+                .comment-author-profile-photo,
+                .comment-action-button {
                     position: absolute;
                     order: 2;
                     bottom: $space_inComment;
                 }
-                
+
                 .comment-author-profile-photo {
                     left: $space_inComment;
                 }
-                
+
                 .comment-action-button {
                     right: $space_inComment;
                 }
             }
 
             @media screen and (min-width: $breakpoint_small) {
-                > *:not(:last-child) {
+                >*:not(:last-child) {
                     margin-right: calc($space_inComment/2);
                 }
             }
@@ -359,7 +370,7 @@ body {
             flex-direction: column;
             align-items: flex-end;
 
-            > *:not(:last-child) {
+            >*:not(:last-child) {
                 margin-bottom: calc($space_inComment/2);
             }
         }
@@ -374,15 +385,32 @@ body {
             font-size: 0.75rem;
             font-weight: 400;
             color: #8f8f8f;
-        
+
             a {
                 color: #7881aa;
                 font-weight: 400;
-             }
+            }
         }
     }
 
-    
+    @keyframes spinner {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .loading-spinner {
+        border: 4px solid $neut_liGray;
+        border-top: 4px solid $neut_grayishBlue;
+        border-radius: 50%;
+        animation: spinner 1.5s linear infinite;
+    }
+
+
     #delete-modal {
         display: flex;
         justify-content: center;
@@ -394,13 +422,13 @@ body {
         bottom: 0;
         z-index: 1;
         background-color: rgba(0, 0, 0, 0.5);
-        
+
         .delete-modal-popup {
             padding: 2em;
             border-radius: $borderRadius;
             background-color: $neut_white;
 
-            > *:not(.delete-modal-popup-actions) {
+            >*:not(.delete-modal-popup-actions) {
                 margin-bottom: 1rem;
             }
 
@@ -425,7 +453,7 @@ body {
                     color: $neut_white;
                     text-transform: uppercase;
                 }
-                
+
                 .delete-modal-action-cancel {
                     background-color: $neut_grayishBlue;
                     margin-right: 1em;
@@ -435,11 +463,11 @@ body {
                         filter: opacity(50%);
                     }
                 }
-                
+
                 .delete-modal-action-delete {
                     background-color: $prim_softRed;
                     transition: $transition;
-                    
+
                     &:hover {
                         background-color: $prim_paleRed;
                     }
