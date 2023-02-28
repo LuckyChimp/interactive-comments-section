@@ -32,7 +32,8 @@ Users are able to:
 
 ### Link
 
-- Solution URL: [https://interactive-comments-section-xi.vercel.app/](https://interactive-comments-section-xi.vercel.app/) (hosted on [Vercel](https://vercel.com/))
+- Current solution url: [https://interactive-comments-section-production.up.railway.app/](https://interactive-comments-section-production.up.railway.app/)
+- Old solution url of project without MERN stack (only used react and [JSON server](https://github.com/typicode/json-server)) as the REST API: [https://interactive-comments-section-xi.vercel.app/](https://interactive-comments-section-xi.vercel.app/) (hosted on [Vercel](https://vercel.com/))
 
 ## My process
 
