@@ -1,13 +1,16 @@
 const path = require('path');
 const express = require('express');
+const cron = require('node-cron');
 const cors = require('cors');
 const colors = require('colors');
 const dotenv = require('dotenv').config();
-const connectDB = require('./config/db');
+const { connectDB, restoreDefaultData } = require('./config/db');
 const { errorHandler } = require('./middleware/errorMiddleware');
 const port = process.env.PORT || 5000;
 
 connectDB();
+restoreDefaultData();
+cron.schedule('0 0 * * *', restoreDefaultData);
 
 const app = express();
 

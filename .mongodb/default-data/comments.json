@@ -1,0 +1,97 @@
+[
+	{
+		"_id": {
+			"$oid": "62b4d8f1664a1c9797a25b20"
+		},
+		"content": "If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.",
+		"createdAt": {
+			"$date": {
+				"$numberLong": "1675691665000"
+			}
+		},
+		"updatedAt": {
+			"$date": {
+				"$numberLong": "1675691665000"
+			}
+		},
+		"score": 4,
+		"replyingTo": {
+			"$oid": "62b4d94b664a1c9797a25b23"
+		},
+		"user": {
+			"$oid": "62b4d2e6664a1c9797a25b15"
+		}
+	},
+	{
+		"_id": {
+			"$oid": "62b4d8f1664a1c9797a25b21"
+		},
+		"content": "I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.",
+		"createdAt": {
+			"$date": {
+				"$numberLong": "1676123665000"
+			}
+		},
+		"updatedAt": {
+			"$date": {
+				"$numberLong": "1676123665000"
+			}
+		},
+		"score": 2,
+		"replyingTo": {
+			"$oid": "62b4d8f1664a1c9797a25b20"
+		},
+		"user": {
+			"$oid": "62b4d2e6664a1c9797a25b12"
+		}
+	},
+	{
+		"_id": {
+			"$oid": "62b4d94b664a1c9797a25b22"
+		},
+		"content": "Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well.",
+		"createdAt": {
+			"$date": {
+				"$numberLong": "1673618065000"
+			}
+		},
+		"updatedAt": {
+			"$date": {
+				"$numberLong": "1673618065000"
+			}
+		},
+		"score": 12,
+		"user": {
+			"$oid": "62b4d2e6664a1c9797a25b13"
+		},
+		"replies": []
+	},
+	{
+		"_id": {
+			"$oid": "62b4d94b664a1c9797a25b23"
+		},
+		"content": "Woah, your project looks awesome! How long have you been coding for? I'm still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can learn React? Thanks!",
+		"createdAt": {
+			"$date": {
+				"$numberLong": "1675086865000"
+			}
+		},
+		"updatedAt": {
+			"$date": {
+				"$numberLong": "1675086865000"
+			}
+		},
+		"score": 5,
+		"user": {
+			"$oid": "62b4d2e6664a1c9797a25b14"
+		},
+		"replies": [
+			{
+				"$oid": "62b4d8f1664a1c9797a25b20"
+			},
+			{
+				"$oid": "62b4d8f1664a1c9797a25b21"
+			}
+		]
+	}
+]
