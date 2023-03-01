@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Comment = require('../models/commentModel');
 const User = require('../models/userModel');
+const { EJSON } = require('bson');
 
 const connectDB = async () => {
 	mongoose.set('strictQuery', false);
@@ -16,37 +17,21 @@ const connectDB = async () => {
 };
 
 const restoreDefaultData = async () => {
-	const { spawn } = require('child_process');
-	const restoreCollection = (collectionName) => {
-		const restoreProcess = spawn('mongoimport', [
-			`--uri="${process.env.MONGO_URI}"`,
-			`--collection=${collectionName}`,
-			`--file=./.mongodb/default-data/${collectionName}.json`,
-			'--jsonArray'
-		]);
+	const now = new Date().toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'medium' });
 
-		restoreProcess.on('exit', (code, signal) => {
-			const now = new Date().toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'medium' });
-			if (code)
-				console.log(
-					`[${now}] MongoDB restore process of ${String(collectionName).italic} data exited with code ${code}`.red
-				);
-			else if (signal)
-				console.error(
-					`[${now}] MongoDB restore process of ${String(collectionName).italic} data was killed with singal ${signal}`
-						.red
-				);
-			else console.log(`[${now}] MongoDB restore process of ${String(collectionName).italic} data successfull`.cyan);
-		});
-	};
-
-	// first delete all comment data and then restore the default comment data
+	// read comments data from default data file and convert it with EJSON module from extended JSON object to plain json object
+	const commentsData = EJSON.deserialize(require('../../.mongodb/default-data/comments.json'));
+	// delete all comment data in db and then restore the default comment data from the data file into the db
 	await Comment.deleteMany({});
-	restoreCollection('comments');
+	await Comment.insertMany(commentsData);
+	console.log(`[${now}] MongoDB restore process of ${'comments'.italic} data successfull`.cyan);
 
-	// first delete all user data and then restore the default user data
+	// read users data from default data file and convert it with EJSON module from extended JSON object to plain json object
+	const usersData = EJSON.deserialize(require('../../.mongodb/default-data/users.json'));
+	// delete all user data existing in db and then push the default user data from the data file into the db
 	await User.deleteMany({});
-	restoreCollection('users');
+	await User.insertMany(usersData);
+	console.log(`[${now}] MongoDB restore process of ${'users'.italic} data successfull`.cyan);
 };
 
 module.exports = {

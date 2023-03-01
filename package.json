@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/LuckyChimp/interactive-comments-section#readme",
   "dependencies": {
+    "bson": "^5.0.1",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",

@@ -10,6 +10,7 @@ const port = process.env.PORT || 5000;
 
 connectDB();
 restoreDefaultData();
+// reset changes made by others to the live website of the project daily at midnight
 cron.schedule('0 0 * * *', restoreDefaultData);
 
 const app = express();
