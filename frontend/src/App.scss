@@ -102,6 +102,9 @@ body {
                         }
 
                         button {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
                             border: none;
                             color: $prim_liGrayBlue;
                             font-weight: 500;
