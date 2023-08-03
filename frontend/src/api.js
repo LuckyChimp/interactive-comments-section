@@ -1,7 +1,7 @@
 // api url in development mode: http://localhost:5000/api
 // api url in production mode: api
 // don't forget to set NODE_ENV in the root .env file accordingly ;)
-const API_URL = 'api';
+const API_URL = 'http://localhost:5000/api';
 
 const fetchUser = async (userID) => {
 	try {
