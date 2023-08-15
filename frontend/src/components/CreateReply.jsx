@@ -4,6 +4,8 @@ import { CommentsDataContext } from "../App";
 import { createReply, fetchComments } from "../api";
 import LazyAvatar from "./LazyAvatar";
 
+import { toast } from "react-toastify";
+
 const CreateReply = ({ replyingTo, hideMe }) => {
     const { setCommentsData } = useContext(CommentsDataContext);
 
@@ -11,12 +13,16 @@ const CreateReply = ({ replyingTo, hideMe }) => {
 
 
     const handleCreateReply = () => {
-        createReply(text, process.env.REACT_APP_CURRENT_USER_ID, replyingTo).then(createdReplyData => {
-            fetchComments().then(commentsData => {
-                hideMe();
-                setCommentsData(commentsData);
+        if (text) {
+            createReply(text, process.env.REACT_APP_CURRENT_USER_ID, replyingTo).then(createdReplyData => {
+                fetchComments().then(commentsData => {
+                    hideMe();
+                    setCommentsData(commentsData);
+                });
             });
-        });
+        } else {
+            toast.error('For your reply to be posted, please enter some text.');
+        }
     }
 
     const onKeyDown = (event) => {

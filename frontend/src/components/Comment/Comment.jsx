@@ -7,7 +7,9 @@ import CommentHeader from "./CommentHeader";
 import CommentText from "./CommentText";
 import CommentEditSection from "./CommentEditSection";
 
-const Comment = ({ commentData, onReplyClick, onDeleteClick }) => {
+import { toast } from "react-toastify";
+
+const Comment = ({ commentData, onReplyClick, onDeleteClick, isReply }) => {
     const own = commentData.user === process.env.REACT_APP_CURRENT_USER_ID; // check if comment is from current user and set 'own' accordingly
 
     const { commentsData, setCommentsData } = useContext(CommentsDataContext);
@@ -17,11 +19,15 @@ const Comment = ({ commentData, onReplyClick, onDeleteClick }) => {
 
 
     const onUpdateText = (newText) => {
-        updateText(commentData._id, newText).then(commentData => {
-            setEditMode(false);
-            setText(newText);
-            setCommentsData(commentsData.map(_commentData => _commentData._id === commentData._id ? commentData : _commentData));
-        });
+        if (newText) {
+            updateText(commentData._id, newText).then(commentData => {
+                setEditMode(false);
+                setText(newText);
+                setCommentsData(commentsData.map(_commentData => _commentData._id === commentData._id ? commentData : _commentData));
+            });
+        } else {
+            toast.error(`For your ${isReply ? 'reply' : 'comment'} to be updated, please enter some text.`);
+        }
     }
 
 

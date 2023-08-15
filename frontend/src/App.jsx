@@ -6,6 +6,9 @@ import CreateComment from './components/CreateComment';
 import DeleteModal from './components/DeleteModal';
 import './App.scss';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export const CommentsDataContext = createContext();
 
 
@@ -86,6 +89,11 @@ function App() {
 					. Coded by <a href='https://github.com/LuckyChimp'>LuckyChimp</a>.
 				</div>
 			</footer>
+
+			<ToastContainer
+				position='bottom-right'
+				pauseOnHover={false}
+			/>
 
 			{
 				deleteModalVisible &&

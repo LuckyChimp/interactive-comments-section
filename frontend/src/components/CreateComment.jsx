@@ -4,6 +4,8 @@ import { CommentsDataContext } from "../App";
 import { createComment } from "../api";
 import LazyAvatar from './LazyAvatar';
 
+import { toast } from "react-toastify";
+
 const CreateComment = () => {
     const { commentsData, setCommentsData } = useContext(CommentsDataContext);
 
@@ -11,10 +13,14 @@ const CreateComment = () => {
 
 
     const handleCreateComment = () => {
-        createComment(text, process.env.REACT_APP_CURRENT_USER_ID).then(createdCommentData => {
-            setCommentsData([...commentsData, createdCommentData]);
-            setText(''); // empty the textarea field for next comment creation
-        });
+        if (text) {
+            createComment(text, process.env.REACT_APP_CURRENT_USER_ID).then(createdCommentData => {
+                setCommentsData([...commentsData, createdCommentData]);
+                setText(''); // empty the textarea field for next comment creation
+            });
+        } else {
+            toast.error('For your comment to be posted, please enter some text.');
+        }
     };
 
     const onKeyDown = (event) => {

@@ -63,6 +63,7 @@ const ReplyWrapper = ({ replyData, onDeleteClick }) => {
                 commentData={replyData}
                 onReplyClick={() => setReplyMode(!replyMode)}
                 onDeleteClick={(commentID) => onDeleteClick(commentID)}
+                isReply
             />
             {
                 replyMode &&
