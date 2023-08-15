@@ -2,13 +2,7 @@ const API_URL = process.env.NODE_ENV === 'production' ? 'api' : 'http://localhos
 
 const fetchUser = async (userID) => {
 	try {
-		const res = await fetch(`${API_URL}/users/${userID}`);
-		if (!res.ok) {
-			const err = await res.json();
-			console.error(err.stack);
-			return;
-		}
-
+		const res = await fetch(`${API_URL}/userss/${userID}`);
 		const user = await res.json();
 
 		return user;
